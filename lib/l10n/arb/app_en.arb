@@ -739,5 +739,263 @@
         "type": "int"
       }
     }
-  }
+  },
+  "usersDirectoryTitle": "Tripoli Health Staff & Citizen Directory",
+  "usersDirectoryDesc": "Role-Based Access Control (RBAC): Citizens, Certified Health Officers, and Municipal Administrators",
+  "totalRegisteredUsers": "Total Registered Users: {count}",
+  "@totalRegisteredUsers": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "rbacRuleTitle": "System RBAC Rule",
+  "rbacRuleBody": "All new users are registered strictly as Citizens and cannot self-enroll as employees. As an Administrator, you are exclusively authorized to assign roles, officer designations, and field badges.",
+  "searchUsersHint": "Search by name, email, or district...",
+  "allUsersCount": "All ({count})",
+  "@allUsersCount": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "healthOfficersCount": "Health Officers ({count})",
+  "@healthOfficersCount": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "citizensCount": "Citizens ({count})",
+  "@citizensCount": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "administratorsCount": "Administrators ({count})",
+  "@administratorsCount": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "youBadge": "You",
+  "noUsersFound": "No users match this search.",
+  "assignRoleAction": "Assign role",
+  "registerCitizen": "Register New Citizen",
+  "citizenOnlyRole": "Strict Role: Citizen Only",
+  "accountPolicyTitle": "Account Creation Policy",
+  "accountPolicyBody": "All new accounts are strictly created as Citizens. Once created, you as Administrator can assign an employee or health officer role.",
+  "initialPassword": "Initial Password",
+  "registerCitizenBtn": "Register Citizen",
+  "registeringCitizen": "Registering...",
+  "citizenRegistered": "Citizen \"{name}\" registered! You can now assign them a role or badge from the directory.",
+  "@citizenRegistered": {
+    "placeholders": {
+      "name": {
+        "type": "String"
+      }
+    }
+  },
+  "assignRoleTitle": "Assign Role & Credentials",
+  "currentRole": "Current Role: {role}",
+  "@currentRole": {
+    "placeholders": {
+      "role": {
+        "type": "String"
+      }
+    }
+  },
+  "newRoleLabel": "New Role to Assign *",
+  "officerCredentials": "Municipal Field Officer Credentials",
+  "adminPrivileges": "System Administrator Privileges",
+  "badgeNumberLabel": "Official Badge Number",
+  "badgeAutoHint": "Leave empty to keep the current badge or generate one.",
+  "designationTitle": "Official Designation Title",
+  "designationHint": "Leave empty for the default title.",
+  "revokeNotice": "Notice: Field badge and inspection privileges will be revoked, returning user to standard Citizen role.",
+  "confirmRoleAssignment": "Confirm Role Assignment",
+  "assigningRole": "Assigning...",
+  "roleAssigned": "Role assigned successfully: {name} is now {role}.",
+  "@roleAssigned": {
+    "placeholders": {
+      "name": {
+        "type": "String"
+      },
+      "role": {
+        "type": "String"
+      }
+    }
+  },
+  "roleSystem": "System",
+  "categoriesManagementTitle": "Dynamic Public Health Incident Categories",
+  "categoriesManagementDesc": "Configured in database collection with algorithmic risk engine base weights (1–25)",
+  "activeCategoriesCount": "Active Categories: {count}",
+  "@activeCategoriesCount": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "addNewCategory": "Add New Surveillance Category to Database",
+  "categoryNameLabel": "Category Name",
+  "categoryNameHint": "e.g., Radiation Hazard",
+  "baseRiskWeight": "Base Risk Weight (1-25 pts)",
+  "categoryDescHint": "Brief criteria for health officers...",
+  "addCategoryBtn": "Add Category",
+  "errCategoryNameRequired": "Category name is required.",
+  "errWeightRange": "Enter a weight from 1 to 25.",
+  "categoryAdded": "New category \"{name}\" added to database!",
+  "@categoryAdded": {
+    "placeholders": {
+      "name": {
+        "type": "String"
+      }
+    }
+  },
+  "weightUpdated": "Base weight updated for {name}",
+  "@weightUpdated": {
+    "placeholders": {
+      "name": {
+        "type": "String"
+      }
+    }
+  },
+  "weightPoints": "{points} pts",
+  "@weightPoints": {
+    "placeholders": {
+      "points": {
+        "type": "int"
+      }
+    }
+  },
+  "tierHigh": "High Priority Tier",
+  "tierStandard": "Standard Tier",
+  "tierNormal": "Normal Tier",
+  "categoryInactive": "Inactive",
+  "categoryAvailable": "Available in the report form",
+  "categoryEnabled": "{name} is available again.",
+  "@categoryEnabled": {
+    "placeholders": {
+      "name": {
+        "type": "String"
+      }
+    }
+  },
+  "categoryDisabled": "{name} is hidden from new reports.",
+  "@categoryDisabled": {
+    "placeholders": {
+      "name": {
+        "type": "String"
+      }
+    }
+  },
+  "decreaseWeight": "Decrease weight",
+  "increaseWeight": "Increase weight",
+  "settingsTitle": "System Settings & Smart Risk Thresholds",
+  "settingsSubtitle": "Risk scoring weights, spatial-temporal cluster discovery and maintenance actions",
+  "engineReadOnlyNote": "These parameters are defined by the server's engines and shown read-only.",
+  "riskWeightsTitle": "Smart Risk Assessment Algorithm Weights (Total: 100 pts)",
+  "weightSeverity": "Severity Weight",
+  "weightAffected": "Affected People Score",
+  "weightRecency": "Temporal Recency Weight",
+  "weightCluster": "Geographic Density Weight",
+  "weightCategory": "Category Base Weight",
+  "upToPoints": "up to {points} pts",
+  "@upToPoints": {
+    "placeholders": {
+      "points": {
+        "type": "int"
+      }
+    }
+  },
+  "recalibrationTitle": "Live Risk Recalibration",
+  "recalibrationDesc": "Execute scoring pipeline across all open incident reports",
+  "recalculateScores": "Recalculate All Scores",
+  "recalculating": "Recalculating...",
+  "scoresRecalculated": "Risk scores recalculated for {count} open reports.",
+  "@scoresRecalculated": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "clusterSettingsTitle": "Spatial-Temporal Cluster Detection Engine Settings",
+  "clusterSettingsDesc": "Automated outbreak pattern recognition across Tripoli districts",
+  "correlationRadius": "Correlation radius",
+  "kilometers": "{km} km",
+  "@kilometers": {
+    "placeholders": {
+      "km": {
+        "type": "String"
+      }
+    }
+  },
+  "temporalWindow": "Temporal time window",
+  "hoursValue": "{hours} h",
+  "@hoursValue": {
+    "placeholders": {
+      "hours": {
+        "type": "int"
+      }
+    }
+  },
+  "minimumReports": "Minimum incident reports",
+  "reportsValue": "{count} reports",
+  "@reportsValue": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "runClusterScanShort": "Run Cluster Scan",
+  "auditLogsTitle": "Municipal Health Surveillance Audit Logs",
+  "auditLogsDesc": "Immutable forensic log of all status transitions, officer dispatches, and cluster activations",
+  "searchAudit": "Search audit trail...",
+  "noAuditEntries": "No audit log entries",
+  "ipAddress": "IP {ip}",
+  "@ipAddress": {
+    "placeholders": {
+      "ip": {
+        "type": "String"
+      }
+    }
+  },
+  "auditEntriesCount": "{shown} of {total} entries",
+  "@auditEntriesCount": {
+    "placeholders": {
+      "shown": {
+        "type": "int"
+      },
+      "total": {
+        "type": "int"
+      }
+    }
+  },
+  "actionAcknowledgeAlert": "Acknowledge Alert",
+  "actionAssignOfficer": "Assign Officer",
+  "actionCreateCategory": "Create Category",
+  "actionCreateInvestigation": "Start Investigation",
+  "actionCreateUser": "Create User",
+  "actionFinalizeInvestigation": "Finalize Investigation",
+  "actionReassessRisk": "Reassess Risk",
+  "actionResolveAlert": "Resolve Alert",
+  "actionRunClusterScan": "Cluster Scan",
+  "actionSubmitReport": "Report Submitted",
+  "actionUpdateCategory": "Update Category",
+  "actionUpdateClusterStatus": "Cluster Status Change",
+  "actionUpdateInvestigation": "Update Investigation",
+  "actionUpdateReportStatus": "Status Transition",
+  "actionUpdateUserRole": "User Role Change",
+  "actionUserLogin": "Sign In",
+  "actionUserRegister": "Registration"
 }

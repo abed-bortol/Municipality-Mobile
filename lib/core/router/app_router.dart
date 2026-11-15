@@ -5,9 +5,11 @@ import 'package:municipality/core/router/app_routes.dart';
 import 'package:municipality/core/widgets/coming_soon.dart';
 import 'package:municipality/features/alerts/presentation/screens/alerts_screen.dart';
 import 'package:municipality/features/analytics/presentation/analytics_screen.dart';
+import 'package:municipality/features/audit/presentation/audit_logs_screen.dart';
 import 'package:municipality/features/auth/domain/auth_state.dart';
 import 'package:municipality/features/auth/presentation/auth_controller.dart';
 import 'package:municipality/features/auth/presentation/screens/auth_screen.dart';
+import 'package:municipality/features/categories/presentation/screens/categories_screen.dart';
 import 'package:municipality/features/clusters/presentation/screens/clusters_screen.dart';
 import 'package:municipality/features/dashboard/presentation/dashboard_screen.dart';
 import 'package:municipality/features/investigations/presentation/screens/investigation_form_screen.dart';
@@ -20,8 +22,10 @@ import 'package:municipality/features/reports/presentation/screens/new_report_sc
 import 'package:municipality/features/reports/presentation/screens/report_details_screen.dart';
 import 'package:municipality/features/reports/presentation/screens/reports_screen.dart';
 import 'package:municipality/features/shell/presentation/app_shell.dart';
+import 'package:municipality/features/settings/presentation/system_settings_screen.dart';
 import 'package:municipality/features/splash/presentation/app_startup_controller.dart';
 import 'package:municipality/features/splash/presentation/splash_screen.dart';
+import 'package:municipality/features/users/presentation/screens/users_screen.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 
 part 'app_router.g.dart';
@@ -129,10 +133,11 @@ GoRouter appRouter(Ref ref) {
                   builder: (context, state) => const AnalyticsScreen(),
                 ),
                 _comingSoon(AppRoutes.exportDossier, (l10n) => l10n.exportDossier),
-                _comingSoon(AppRoutes.users, (l10n) => l10n.usersOfficers),
-                _comingSoon(AppRoutes.categories, (l10n) => l10n.reportCategories),
-                _comingSoon(AppRoutes.systemSettings, (l10n) => l10n.systemSettings),
-                _comingSoon(AppRoutes.auditLogs, (l10n) => l10n.auditTrail),
+                _moreRoute(AppRoutes.users, (_) => const UsersScreen()),
+                _moreRoute(AppRoutes.categories, (_) => const CategoriesScreen()),
+                _moreRoute(
+                    AppRoutes.systemSettings, (_) => const SystemSettingsScreen()),
+                _moreRoute(AppRoutes.auditLogs, (_) => const AuditLogsScreen()),
               ],
             ),
           ]),
@@ -158,6 +163,11 @@ GoRoute _comingSoon(String fullPath, String Function(AppLocalizations) title) =>
       path: _relativeToMore(fullPath),
       builder: (context, state) =>
           ComingSoonScreen(title: title(context.l10n)),
+    );
+
+GoRoute _moreRoute(String fullPath, WidgetBuilder screen) => GoRoute(
+      path: _relativeToMore(fullPath),
+      builder: (context, state) => screen(context),
     );
 
 String _relativeToMore(String fullPath) =>
