@@ -4,6 +4,7 @@ import 'package:municipality/l10n/l10n.dart';
 import 'package:municipality/core/router/app_routes.dart';
 import 'package:municipality/core/widgets/coming_soon.dart';
 import 'package:municipality/features/alerts/presentation/screens/alerts_screen.dart';
+import 'package:municipality/features/analytics/presentation/analytics_screen.dart';
 import 'package:municipality/features/auth/domain/auth_state.dart';
 import 'package:municipality/features/auth/presentation/auth_controller.dart';
 import 'package:municipality/features/auth/presentation/screens/auth_screen.dart';
@@ -123,7 +124,10 @@ GoRouter appRouter(Ref ref) {
                   path: _relativeToMore(AppRoutes.clusters),
                   builder: (context, state) => const ClustersScreen(),
                 ),
-                _comingSoon(AppRoutes.analytics, (l10n) => l10n.epidemiologyCharts),
+                GoRoute(
+                  path: _relativeToMore(AppRoutes.analytics),
+                  builder: (context, state) => const AnalyticsScreen(),
+                ),
                 _comingSoon(AppRoutes.exportDossier, (l10n) => l10n.exportDossier),
                 _comingSoon(AppRoutes.users, (l10n) => l10n.usersOfficers),
                 _comingSoon(AppRoutes.categories, (l10n) => l10n.reportCategories),

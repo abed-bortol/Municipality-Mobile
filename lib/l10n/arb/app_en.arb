@@ -707,5 +707,37 @@
       }
     }
   },
-  "viewOnMap": "View on map"
+  "viewOnMap": "View on map",
+  "totalRegisteredReports": "Total Registered Reports",
+  "resolutionContainmentRate": "Resolution & Containment Rate",
+  "resolvedClosedCount": "{count} closed/resolved",
+  "@resolvedClosedCount": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "criticalScoreHint": "Score ≥ 76/100",
+  "incidentDistributionByCategory": "Incident Distribution by Health Category",
+  "topReportedHazards": "Top Reported Hazards",
+  "riskLevelDistribution": "Risk Level Distribution",
+  "algorithmicAssessment": "Algorithmic",
+  "incidentsByTripoliDistrict": "Incidents by Tripoli District / Neighborhood",
+  "geographicSpread": "Geographic Spread",
+  "investigationLifecycleStatus": "Investigation Lifecycle Status Distribution",
+  "pipeline": "Pipeline",
+  "noIncidentDataTitle": "No Incident Data Recorded Yet",
+  "noIncidentDataBody": "The database is currently empty. Once citizen reports or field inspections are filed in Tripoli, analytic charts and risk distributions will generate automatically.",
+  "chartValue": "{label}: {count}",
+  "@chartValue": {
+    "placeholders": {
+      "label": {
+        "type": "String"
+      },
+      "count": {
+        "type": "int"
+      }
+    }
+  }
 }
