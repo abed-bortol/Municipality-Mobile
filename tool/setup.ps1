@@ -47,7 +47,7 @@ Update-File 'ios/Runner/Info.plist' {
 flutter pub get
 if ($LASTEXITCODE) { throw 'flutter pub get failed' }
 # Generates *.g.dart / *.freezed.dart (Riverpod providers, Freezed models, JSON).
-dart run build_runner build --delete-conflicting-outputs
+dart run build_runner build
 if ($LASTEXITCODE) { throw 'build_runner failed' }
 dart run flutter_launcher_icons
 if ($LASTEXITCODE) { throw 'flutter_launcher_icons failed' }
