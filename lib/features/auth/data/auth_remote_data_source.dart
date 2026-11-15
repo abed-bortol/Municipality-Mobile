@@ -1,6 +1,7 @@
 import 'package:dio/dio.dart';
 import 'package:municipality/core/network/api_exception.dart';
 import 'package:municipality/core/network/dio_provider.dart';
+import 'package:municipality/features/auth/domain/profile_update.dart';
 import 'package:municipality/features/auth/domain/register_request.dart';
 import 'package:municipality/features/auth/domain/user.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
@@ -40,6 +41,19 @@ class AuthRemoteDataSource {
   Future<User> me() => _guard(() async {
         final res = await _dio.get<Map<String, dynamic>>('/auth/me');
         return User.fromJson(_data(res.data)['user'] as Map<String, dynamic>);
+      });
+
+  /// `PUT /users/me` answers `{ success, user }` (not under `data`).
+  Future<User> updateProfile(ProfileUpdate update) => _guard(() async {
+        final res = await _dio.put<Map<String, dynamic>>(
+          '/users/me',
+          data: update.toJson(),
+        );
+        final user = res.data?['user'];
+        if (user is! Map<String, dynamic>) {
+          throw const UnexpectedResponseException();
+        }
+        return User.fromJson(user);
       });
 
   static AuthSession _session(Map<String, dynamic>? body) {

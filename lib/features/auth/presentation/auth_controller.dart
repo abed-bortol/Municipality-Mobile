@@ -1,6 +1,7 @@
 import 'package:municipality/core/network/api_exception.dart';
 import 'package:municipality/features/auth/data/auth_repository_impl.dart';
 import 'package:municipality/features/auth/domain/auth_state.dart';
+import 'package:municipality/features/auth/domain/profile_update.dart';
 import 'package:municipality/features/auth/domain/register_request.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 
@@ -42,6 +43,12 @@ class AuthController extends _$AuthController {
 
   Future<void> register(RegisterRequest request) async {
     final user = await ref.read(authRepositoryProvider).register(request);
+    state = AsyncData(AuthState.authenticated(user));
+  }
+
+  /// Throws [ApiException]; on success every screen sees the new details.
+  Future<void> updateProfile(ProfileUpdate update) async {
+    final user = await ref.read(authRepositoryProvider).updateProfile(update);
     state = AsyncData(AuthState.authenticated(user));
   }
 

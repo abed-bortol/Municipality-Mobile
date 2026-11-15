@@ -25,8 +25,10 @@ void main() {
     });
 
     test('unknown role falls back to citizen', () {
-      expect(User.fromJson({'_id': '1', 'role': 'SYSTEM'}).role,
-          UserRole.citizen);
+      expect(
+        User.fromJson({'_id': '1', 'role': 'SYSTEM'}).role,
+        UserRole.citizen,
+      );
     });
 
     test('round-trips through toJson (stored session)', () {
@@ -43,7 +45,11 @@ void main() {
   });
 
   test('RegisterRequest omits a null district', () {
-    const request = RegisterRequest(name: 'A', email: 'a@b.c', password: 'secret');
+    const request = RegisterRequest(
+      name: 'A',
+      email: 'a@b.c',
+      password: 'secret',
+    );
     expect(request.toJson().containsKey('district'), isFalse);
     expect(request.toJson()['phone'], '');
   });

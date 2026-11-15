@@ -1,4 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
+import 'package:municipality/core/router/app_routes.dart';
+import 'package:municipality/core/widgets/user_avatar.dart';
 import 'package:municipality/l10n/l10n.dart';
 import 'package:municipality/core/theme/app_colors.dart';
 import 'package:municipality/features/auth/domain/user.dart';
@@ -12,7 +15,6 @@ class ProfileCard extends StatelessWidget {
   Widget build(BuildContext context) {
     final l10n = context.l10n;
     final textTheme = Theme.of(context).textTheme;
-    final initial = user.name.isEmpty ? '?' : user.name.characters.first;
 
     return Container(
       padding: const EdgeInsets.all(20),
@@ -23,15 +25,7 @@ class ProfileCard extends StatelessWidget {
       ),
       child: Row(
         children: [
-          CircleAvatar(
-            radius: 28,
-            backgroundColor: AppColors.teal600,
-            child: Text(
-              initial.toUpperCase(),
-              style: textTheme.titleLarge?.copyWith(
-                  color: Colors.white, fontWeight: FontWeight.w800),
-            ),
-          ),
+          UserAvatar(name: user.name, url: user.avatarUrl),
           const SizedBox(width: 16),
           Expanded(
             child: Column(
@@ -45,6 +39,10 @@ class ProfileCard extends StatelessWidget {
                     textDirection: TextDirection.ltr,
                     style: textTheme.bodySmall
                         ?.copyWith(color: AppColors.slate400)),
+                if (user.title != null)
+                  Text(user.title!,
+                      style: textTheme.bodySmall
+                          ?.copyWith(color: AppColors.teal400)),
                 const SizedBox(height: 10),
                 Wrap(
                   spacing: 8,
@@ -62,6 +60,11 @@ class ProfileCard extends StatelessWidget {
                 ),
               ],
             ),
+          ),
+          IconButton(
+            tooltip: l10n.editProfile,
+            onPressed: () => context.go(AppRoutes.profile),
+            icon: const Icon(Icons.edit_outlined),
           ),
         ],
       ),

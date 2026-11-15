@@ -1,3 +1,4 @@
+import 'package:municipality/features/auth/domain/profile_update.dart';
 import 'package:municipality/features/auth/domain/register_request.dart';
 import 'package:municipality/features/auth/domain/user.dart';
 
@@ -13,6 +14,9 @@ abstract interface class AuthRepository {
   Future<User> signIn({required String email, required String password});
 
   Future<User> register(RegisterRequest request);
+
+  /// Saves the signed-in user's own details and the updated session copy.
+  Future<User> updateProfile(ProfileUpdate update);
 
   Future<void> signOut();
 }
