@@ -1,0 +1,72 @@
+name: municipality
+description: "Tripoli HealthPulse - Smart Public Health Surveillance & Reporting (mobile app)."
+publish_to: 'none'
+
+version: 1.0.0+1
+
+environment:
+  sdk: ^3.8.0
+
+dependencies:
+  flutter:
+    sdk: flutter
+  flutter_localizations:
+    sdk: flutter
+
+  # State management (code generation via riverpod_generator)
+  flutter_riverpod: ^3.0.3
+  riverpod_annotation: ^3.0.3
+
+  # Immutable models / unions + JSON
+  freezed_annotation: ^3.1.0
+  json_annotation: ^4.9.0
+
+  # Networking (the website uses axios; dio is the Flutter equivalent)
+  dio: ^5.9.0
+
+  # Navigation with auth redirects
+  go_router: ^16.2.4
+
+  # JWT in Android Keystore / iOS Keychain (web uses localStorage)
+  flutter_secure_storage: ^9.2.4
+  shared_preferences: ^2.5.3
+
+  # UI: Inter (English) and Cairo (Arabic), same fonts as the website
+  google_fonts: ^6.3.2
+  flutter_native_splash: ^2.4.6
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+  flutter_lints: ^6.0.0
+  build_runner: ^2.7.1
+  riverpod_generator: ^3.0.3
+  freezed: ^3.2.3
+  json_serializable: ^6.11.1
+  flutter_launcher_icons: ^0.14.4
+
+flutter:
+  uses-material-design: true
+  assets:
+    - assets/branding/
+
+# dart run flutter_launcher_icons
+flutter_launcher_icons:
+  android: true
+  ios: true
+  image_path: "assets/branding/app_icon.png"
+  remove_alpha_ios: true
+  adaptive_icon_background: "assets/branding/app_icon_background.png"
+  adaptive_icon_foreground: "assets/branding/app_icon_foreground.png"
+  adaptive_icon_monochrome: "assets/branding/app_icon_foreground.png"
+  min_sdk_android: 21
+
+# dart run flutter_native_splash:create
+flutter_native_splash:
+  color: "#0f172a"
+  image: assets/branding/splash_logo.png
+  android_12:
+    color: "#0f172a"
+    image: assets/branding/splash_logo_android12.png
+    icon_background_color: "#0f172a"
+  web: false
