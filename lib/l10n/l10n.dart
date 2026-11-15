@@ -17,7 +17,30 @@ extension ServerValueL10n on AppLocalizations {
         'CITIZEN' => roleCitizen,
         'HEALTH_OFFICER' => roleHealthOfficer,
         'ADMINISTRATOR' => roleAdministrator,
+        'SYSTEM' => roleSystem,
         _ => apiRole,
+      };
+
+  /// Audit trail actions logged by the server (auditService callers).
+  String auditActionLabel(String action) => switch (action) {
+        'ACKNOWLEDGE_ALERT' => actionAcknowledgeAlert,
+        'ASSIGN_OFFICER' => actionAssignOfficer,
+        'CREATE_CATEGORY' => actionCreateCategory,
+        'CREATE_INVESTIGATION' => actionCreateInvestigation,
+        'CREATE_USER' => actionCreateUser,
+        'FINALIZE_INVESTIGATION' => actionFinalizeInvestigation,
+        'REASSESS_RISK' => actionReassessRisk,
+        'RESOLVE_ALERT' => actionResolveAlert,
+        'RUN_CLUSTER_SCAN' => actionRunClusterScan,
+        'SUBMIT_REPORT' => actionSubmitReport,
+        'UPDATE_CATEGORY' => actionUpdateCategory,
+        'UPDATE_CLUSTER_STATUS' => actionUpdateClusterStatus,
+        'UPDATE_INVESTIGATION' => actionUpdateInvestigation,
+        'UPDATE_REPORT_STATUS' => actionUpdateReportStatus,
+        'UPDATE_USER_ROLE' => actionUpdateUserRole,
+        'USER_LOGIN' => actionUserLogin,
+        'USER_REGISTER' => actionUserRegister,
+        _ => action,
       };
 
   String statusLabel(String apiStatus) => switch (apiStatus) {
