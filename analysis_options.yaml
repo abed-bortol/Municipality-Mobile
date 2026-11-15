@@ -5,6 +5,8 @@ analyzer:
     - "**/*.g.dart"
     - "**/*.freezed.dart"
     - build/**
+    - android/**
+    - ios/**
   errors:
     # @JsonKey on freezed constructor parameters is the documented pattern.
     invalid_annotation_target: ignore
