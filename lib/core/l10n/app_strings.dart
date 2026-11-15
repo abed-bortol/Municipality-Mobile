@@ -72,6 +72,50 @@ class AppStrings {
   String districtName(String district) =>
       isAr ? (_districtsAr[district] ?? district) : district;
 
+  /// Raw API status (e.g. `IN_INVESTIGATION`) -> label (website STATUS_MAP).
+  String statusLabel(String apiStatus) =>
+      _statuses[apiStatus]?[isAr ? 'ar' : 'en'] ?? apiStatus;
+
+  /// Raw API risk level (e.g. `CRITICAL`) -> label (website RISK_MAP).
+  String riskLabel(String apiLevel) =>
+      _risks[apiLevel]?[isAr ? 'ar' : 'en'] ?? apiLevel;
+
+  /// Server category names are English; Arabic from website CATEGORIES_MAP.
+  String categoryName(String name) =>
+      isAr ? (_categoriesAr[name] ?? name) : name;
+
+  static const _statuses = {
+    'SUBMITTED': {'en': 'Submitted', 'ar': 'تم التقديم'},
+    'UNDER_REVIEW': {'en': 'Under Review', 'ar': 'قيد التدقيق'},
+    'VERIFIED': {'en': 'Verified', 'ar': 'تم التحقق'},
+    'IN_INVESTIGATION': {'en': 'In Investigation', 'ar': 'قيد التحقيق الميداني'},
+    'RESOLVED': {'en': 'Resolved', 'ar': 'تمت المعالجة'},
+    'CLOSED': {'en': 'Closed', 'ar': 'مغلق نهائياً'},
+    'REJECTED': {'en': 'Rejected', 'ar': 'مرفوض'},
+  };
+
+  static const _risks = {
+    'CRITICAL': {'en': 'Critical', 'ar': 'حرج جداً'},
+    'HIGH': {'en': 'High', 'ar': 'مرتفع'},
+    'MEDIUM': {'en': 'Medium', 'ar': 'متوسط'},
+    'LOW': {'en': 'Low', 'ar': 'منخفض'},
+  };
+
+  static const _categoriesAr = {
+    'Food Safety': 'سلامة الغذاء',
+    'Suspected Food Poisoning': 'اشتباه تسمم غذائي',
+    'Water Contamination': 'تلوث شبكة المياه',
+    'Unsafe Drinking Water': 'مياه شرب غير صالحة',
+    'Sewage Problem': 'طفح مياه الصرف الصحي',
+    'Garbage Accumulation': 'تراكم وتكدس النفايات',
+    'Air Pollution': 'تلوث الهواء والانبعاثات',
+    'Mosquito Infestation': 'انتشار وبؤر البعوض',
+    'Rodent/Pest Problem': 'انتشار القوارض والجرذان',
+    'Suspected Disease/Outbreak': 'اشتباه تفشي وبائي',
+    'Environmental Hazard': 'مخاطر بيئية وصناعية',
+    'Other': 'أخرى',
+  };
+
   /// `TRIPOLI_DISTRICTS` from the website's APIConst.ts.
   static const districts = [
     'Al-Tal',
