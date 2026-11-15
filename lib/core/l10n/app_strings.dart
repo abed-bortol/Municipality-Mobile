@@ -67,6 +67,47 @@ class AppStrings {
   String get signOutConfirmBody => _t('signOutConfirmBody');
   String get cancel => _t('cancel');
 
+  // Navigation: short tab labels (bottom bar fits 1-2 words)
+  String get navHome => _t('navHome');
+  String get navReports => _t('navReports');
+  String get navMyReports => _t('navMyReports');
+  String get navMap => _t('navMap');
+  String get navAlerts => _t('navAlerts');
+  String get navNotices => _t('navNotices');
+  String get navMore => _t('navMore');
+  String get navAccount => _t('navAccount');
+
+  // Screen titles (website Sidebar labels)
+  String get citizenDashboard => _t('citizenDashboard');
+  String get authorityDashboard => _t('authorityDashboard');
+  String get adminDashboard => _t('adminDashboard');
+  String get submitIncident => _t('submitIncident');
+  String get myReports => _t('myReports');
+  String get publicPortal => _t('publicPortal');
+  String get tripoliMap => _t('tripoliMap');
+  String get reportTriage => _t('reportTriage');
+  String get allReports => _t('allReports');
+  String get investigations => _t('investigations');
+  String get clusterDetection => _t('clusterDetection');
+  String get surveillanceAlerts => _t('surveillanceAlerts');
+  String get epidemiologyCharts => _t('epidemiologyCharts');
+  String get usersOfficers => _t('usersOfficers');
+  String get reportCategories => _t('reportCategories');
+  String get systemSettings => _t('systemSettings');
+  String get auditTrail => _t('auditTrail');
+  String get exportDossier => _t('exportDossier');
+  String get notifications => _t('notifications');
+
+  // More / account screen
+  String get account => _t('account');
+  String get operations => _t('operations');
+  String get administration => _t('administration');
+  String get preferences => _t('preferences');
+  String get language => _t('language');
+  String get comingSoonTitle => _t('comingSoonTitle');
+  String get comingSoonBody => _t('comingSoonBody');
+  String get retry => _t('retry');
+
   String role(String apiRole) => _roles[apiRole]?[isAr ? 'ar' : 'en'] ?? apiRole;
 
   String districtName(String district) =>
@@ -275,5 +316,73 @@ class AppStrings {
       'ar': 'ستحتاج إلى تسجيل الدخول مجدداً للوصول إلى المنظومة.',
     },
     'cancel': {'en': 'Cancel', 'ar': 'إلغاء'},
+    'navHome': {'en': 'Home', 'ar': 'الرئيسية'},
+    'navReports': {'en': 'Reports', 'ar': 'البلاغات'},
+    'navMyReports': {'en': 'My Reports', 'ar': 'بلاغاتي'},
+    'navMap': {'en': 'Map', 'ar': 'الخريطة'},
+    'navAlerts': {'en': 'Alerts', 'ar': 'التنبيهات'},
+    'navNotices': {'en': 'Notices', 'ar': 'الإرشادات'},
+    'navMore': {'en': 'More', 'ar': 'المزيد'},
+    'navAccount': {'en': 'Account', 'ar': 'حسابي'},
+    'citizenDashboard': {'en': 'Citizen Dashboard', 'ar': 'لوحة تحكم المواطن'},
+    'authorityDashboard': {
+      'en': 'Authority Dashboard',
+      'ar': 'لوحة التحكم والعمليات',
+    },
+    'adminDashboard': {'en': 'Admin Command Center', 'ar': 'مركز قيادة الإدارة'},
+    'submitIncident': {'en': 'Submit Incident', 'ar': 'تقديم بلاغ جديد'},
+    'myReports': {'en': 'My Reports & Tracking', 'ar': 'بلاغاتي والمتابعة'},
+    'publicPortal': {
+      'en': 'Tripoli Health Notices',
+      'ar': 'الإرشادات الصحية العامة',
+    },
+    'tripoliMap': {'en': 'Tripoli Live Map', 'ar': 'خريطة طرابلس التفاعلية'},
+    'reportTriage': {
+      'en': 'Report Triage & Review',
+      'ar': 'فرز ومراجعة البلاغات',
+    },
+    'allReports': {'en': 'All Incident Reports', 'ar': 'سجل البلاغات الشامل'},
+    'investigations': {
+      'en': 'Field Investigations',
+      'ar': 'التحقيقات الميدانية والمخبرية',
+    },
+    'clusterDetection': {'en': 'Cluster Detection', 'ar': 'رصد البؤر الوبائية'},
+    'surveillanceAlerts': {
+      'en': 'Surveillance Alerts',
+      'ar': 'التنبيهات الصحية الطارئة',
+    },
+    'epidemiologyCharts': {
+      'en': 'Epidemiology Charts',
+      'ar': 'الإحصائيات والرسوم البيانية',
+    },
+    'usersOfficers': {
+      'en': 'Users & Officers',
+      'ar': 'إدارة المستخدمين والمفتشين',
+    },
+    'reportCategories': {'en': 'Report Categories', 'ar': 'إدارة فئات المخاطر'},
+    'systemSettings': {
+      'en': 'System & Risk Settings',
+      'ar': 'إعدادات النظام والمعايير',
+    },
+    'auditTrail': {'en': 'System Audit Trail', 'ar': 'سجل التدقيق الأمني'},
+    'exportDossier': {
+      'en': 'Export Official Dossier',
+      'ar': 'تصدير التقرير الرسمي',
+    },
+    'notifications': {
+      'en': 'Surveillance Notifications',
+      'ar': 'إشعارات الترصد الصحي',
+    },
+    'account': {'en': 'Account', 'ar': 'الحساب'},
+    'operations': {'en': 'Operations', 'ar': 'العمليات'},
+    'administration': {'en': 'Administration', 'ar': 'الإدارة'},
+    'preferences': {'en': 'Preferences', 'ar': 'التفضيلات'},
+    'language': {'en': 'Language', 'ar': 'اللغة'},
+    'comingSoonTitle': {'en': 'Coming soon', 'ar': 'قريباً'},
+    'comingSoonBody': {
+      'en': 'This section is being ported from the web portal.',
+      'ar': 'يجري نقل هذا القسم من البوابة الإلكترونية.',
+    },
+    'retry': {'en': 'Retry', 'ar': 'إعادة المحاولة'},
   };
 }

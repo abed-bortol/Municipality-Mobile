@@ -13,6 +13,8 @@ abstract final class AppColors {
   static const teal500 = Color(0xFF14B8A6);
   static const teal400 = Color(0xFF2DD4BF);
   static const teal300 = Color(0xFF5EEAD4);
+  static const teal800 = Color(0xFF115E59);
+  static const teal950 = Color(0xFF042F2E);
   static const cyan500 = Color(0xFF06B6D4);
 
   static const slate500 = Color(0xFF64748B);
