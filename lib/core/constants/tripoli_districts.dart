@@ -17,3 +17,7 @@ const tripoliDistricts = [
   'Azmi Street',
   'Bab Al-Ramel',
 ];
+
+/// City centre (website `TRIPOLI_COORDINATES`), used as the default
+/// incident location until a point is picked on the map.
+const tripoliCenter = (lat: 34.4367, lng: 35.8497);

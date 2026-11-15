@@ -221,5 +221,192 @@
     }
   },
   "loadError": "Couldn't load the data.",
-  "refresh": "Refresh"
+  "refresh": "Refresh",
+  "incidentRecords": "Tripoli Public Health Incident Records",
+  "showingReports": "Showing {shown} of {total} incidents",
+  "@showingReports": {
+    "placeholders": {
+      "shown": {
+        "type": "int"
+      },
+      "total": {
+        "type": "int"
+      }
+    }
+  },
+  "searchReportsHint": "Search by #number, title, reporter, or district...",
+  "filters": "Filters",
+  "category": "Category",
+  "riskLevel": "Risk level",
+  "status": "Status",
+  "allCategories": "All Categories",
+  "allDistricts": "All Districts",
+  "allRisks": "All Risk Levels",
+  "allStatuses": "All Statuses",
+  "sortBy": "Sort by:",
+  "sortHighestRisk": "Highest Risk Score",
+  "sortMostRecent": "Most Recent",
+  "sortMostAffected": "Most Affected",
+  "noMatchingReports": "No matching public health reports found.",
+  "clearFilters": "Clear filters",
+  "showResults": "Show results",
+  "unassigned": "Unassigned",
+  "reportedOn": "Reported: {date}",
+  "@reportedOn": {
+    "placeholders": {
+      "date": {
+        "type": "String"
+      }
+    }
+  },
+  "districtArea": "District / Area",
+  "estimatedAffected": "Estimated Affected",
+  "peopleCount": "~{count} people",
+  "@peopleCount": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "assignedOfficer": "Assigned Officer",
+  "reporter": "Reporter",
+  "descriptionLabel": "Description",
+  "evidencePhotoTitle": "Evidence photo",
+  "workflowTitle": "Strict Forward-Only Inspection Protocol",
+  "cannotRevert": "Past stages are locked and cannot be reverted.",
+  "currentStage": "Current Stage",
+  "stageCompleted": "Completed",
+  "nextAction": "Next Sequential Action (Forward-Only)",
+  "nextHintSubmitted": "Incident is freshly submitted. Next protocol step is advancing to formal review & triage.",
+  "nextHintUnderReview": "Report is under review. Verifying advances the case forward; you cannot revert to submitted.",
+  "nextHintVerified": "Incident verified. Next mandatory step is launching the on-site field investigation.",
+  "nextHintInInvestigation": "Field investigation is active. Finalize the inspection to resolve the incident.",
+  "nextHintResolved": "Incident successfully investigated and remediated. Final remaining step is archiving & closing the case.",
+  "proceedToReview": "Advance to Review (Under Review)",
+  "proceedToVerify": "Verify Incident (Verified)",
+  "proceedToInvestigation": "Launch Field Investigation",
+  "finalizeInspection": "Finalize Field Inspection & Resolve",
+  "closeIncidentFinal": "Archive & Final Closeout (Closed)",
+  "caseFinalizedClosed": "Case Finalized & Closed - Record Locked",
+  "reportRejectedTitle": "Report Officially Rejected",
+  "reportRejectedBody": "Dismissed due to invalidity or lack of verification.",
+  "rejectReport": "Reject / False Positive",
+  "rejectionReason": "Rejection Reason / Notes",
+  "rejectionReasonHint": "Reason for dismissal (e.g. duplicate report, no trace of contamination)...",
+  "errReasonRequired": "Please enter a reason.",
+  "statusComment": "Comment (optional)",
+  "confirm": "Confirm",
+  "statusMoved": "Report #{number} moved forward to: {status}",
+  "@statusMoved": {
+    "placeholders": {
+      "number": {
+        "type": "String"
+      },
+      "status": {
+        "type": "String"
+      }
+    }
+  },
+  "reportRejectedToast": "Report #{number} marked as REJECTED.",
+  "@reportRejectedToast": {
+    "placeholders": {
+      "number": {
+        "type": "String"
+      }
+    }
+  },
+  "assignOfficer": "Assign Inspector",
+  "selectHealthOfficer": "Select Health Officer...",
+  "confirmAssignment": "Confirm Assignment",
+  "officerAssigned": "Officer {name} assigned to #{number}",
+  "@officerAssigned": {
+    "placeholders": {
+      "name": {
+        "type": "String"
+      },
+      "number": {
+        "type": "String"
+      }
+    }
+  },
+  "noOfficers": "No active health officers.",
+  "riskBreakdown": "Intelligent Risk Score Breakdown (0–100)",
+  "severityScoreLabel": "Severity Score",
+  "affectedPopLabel": "Affected Population",
+  "recencyWeightLabel": "Recency Weight",
+  "geoClusterLabel": "Geographic Cluster",
+  "categoryPriorityLabel": "Category Priority",
+  "maxPoints": "Max {max} pts",
+  "@maxPoints": {
+    "placeholders": {
+      "max": {
+        "type": "int"
+      }
+    }
+  },
+  "evaluatorJustifications": "Evaluator Justifications:",
+  "auditTrailTitle": "Investigation Audit Trail & Status History",
+  "noHistory": "No status changes yet.",
+  "coordinates": "Latitude: {lat} • Longitude: {lng}",
+  "@coordinates": {
+    "placeholders": {
+      "lat": {
+        "type": "String"
+      },
+      "lng": {
+        "type": "String"
+      }
+    }
+  },
+  "submitReportTitle": "Submit Public Health Incident Report",
+  "submitReportSubtitle": "Municipality of Tripoli • Automated Risk Analysis",
+  "initialSeverity": "Initial Reporter Severity Rating",
+  "incidentTitle": "Incident Title",
+  "incidentTitleHint": "e.g., Brown water coming from residential faucets in Syria Street",
+  "detailedDescription": "Detailed Observation & Description",
+  "descriptionHint": "Describe the problem clearly: color, smell, when it started, health symptoms observed in residents or family...",
+  "tripoliDistrict": "Tripoli District",
+  "streetAddress": "Street Address / Landmark",
+  "addressHint": "Street name, landmark, or building number",
+  "affectedPeopleLabel": "Estimated Number of Affected People",
+  "decrease": "Decrease",
+  "increase": "Increase",
+  "realTimeRiskScore": "Real-Time Intelligent Risk Engine Calculation",
+  "riskEstimateHint": "Estimate only — the server computes the official score.",
+  "scoreOutOf": "{score}/100",
+  "@scoreOutOf": {
+    "placeholders": {
+      "score": {
+        "type": "int"
+      }
+    }
+  },
+  "evidencePhoto": "Evidence Photo URL (Optional)",
+  "additionalRemarks": "Additional Citizen Remarks",
+  "remarksHint": "Any preferred contact hours or details for the visiting inspector",
+  "errTitleRequired": "Please provide an incident title.",
+  "errDescriptionShort": "Please provide a detailed description (minimum 15 characters).",
+  "errCategoryRequired": "Please select a category.",
+  "errAddressRequired": "Please enter the address or a nearby landmark.",
+  "errUrlInvalid": "Enter a valid http(s) link.",
+  "submitReport": "Submit Report",
+  "submittingReport": "Submitting…",
+  "reportCreated": "Incident #{number} registered! Risk Score: {score} ({level})",
+  "@reportCreated": {
+    "placeholders": {
+      "number": {
+        "type": "String"
+      },
+      "score": {
+        "type": "int"
+      },
+      "level": {
+        "type": "String"
+      }
+    }
+  },
+  "discardReportTitle": "Discard this report?",
+  "discardReportBody": "What you entered will be lost.",
+  "discard": "Discard"
 }

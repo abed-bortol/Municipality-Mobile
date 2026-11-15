@@ -9,7 +9,7 @@ import 'package:municipality/core/widgets/primary_button.dart';
 import 'package:municipality/core/widgets/section_card.dart';
 import 'package:municipality/core/widgets/skeleton.dart';
 import 'package:municipality/features/auth/domain/user.dart';
-import 'package:municipality/features/dashboard/presentation/dashboard_providers.dart';
+import 'package:municipality/features/reports/presentation/reports_providers.dart';
 import 'package:municipality/features/reports/domain/report.dart';
 import 'package:municipality/features/reports/presentation/widgets/report_card.dart';
 import 'package:municipality/l10n/l10n.dart';
@@ -24,7 +24,7 @@ class CitizenDashboard extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final l10n = context.l10n;
-    final reports = ref.watch(dashboardReportsProvider);
+    final reports = ref.watch(reportsProvider);
     final page = reports.value;
     final list = page?.reports ?? const <Report>[];
     final total = page?.total ?? 0;
@@ -35,7 +35,7 @@ class CitizenDashboard extends ConsumerWidget {
     return RefreshIndicator(
       // Failures are shown in place, so the spinner just stops.
       onRefresh: () => ref
-          .refresh(dashboardReportsProvider.future)
+          .refresh(reportsProvider.future)
           .then((_) {}, onError: (_) {}),
       child: ListView(
         padding: const EdgeInsets.all(16),
@@ -102,7 +102,7 @@ class CitizenDashboard extends ConsumerWidget {
                 ],
               ),
               AsyncError() => LoadErrorView(
-                onRetry: () => ref.invalidate(dashboardReportsProvider),
+                onRetry: () => ref.invalidate(reportsProvider),
               ),
               _ => const _ListSkeleton(),
             },

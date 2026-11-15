@@ -11,6 +11,7 @@ import 'package:municipality/core/widgets/skeleton.dart';
 import 'package:municipality/features/clusters/domain/cluster.dart';
 import 'package:municipality/features/dashboard/domain/dashboard_stats.dart';
 import 'package:municipality/features/dashboard/presentation/dashboard_providers.dart';
+import 'package:municipality/features/reports/presentation/reports_providers.dart';
 import 'package:municipality/features/reports/domain/report.dart';
 import 'package:municipality/features/reports/presentation/widgets/report_card.dart';
 import 'package:municipality/l10n/l10n.dart';
@@ -29,7 +30,7 @@ class StaffDashboard extends ConsumerWidget {
     // Failures are shown per section, so the spinner just stops.
     Future<void> refresh() => Future.wait([
       ref.refresh(dashboardStatsProvider.future),
-      ref.refresh(dashboardReportsProvider.future),
+      ref.refresh(reportsProvider.future),
       ref.refresh(activeClustersProvider.future),
     ]).then((_) {}, onError: (_) {});
 
@@ -406,7 +407,7 @@ class _TriageQueue extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final l10n = context.l10n;
-    final reports = ref.watch(dashboardReportsProvider);
+    final reports = ref.watch(reportsProvider);
 
     return SectionCard(
       title: l10n.priorityQueue,
@@ -418,7 +419,7 @@ class _TriageQueue extends ConsumerWidget {
           priorityTriageQueue(value.reports),
         ),
         AsyncError() => LoadErrorView(
-          onRetry: () => ref.invalidate(dashboardReportsProvider),
+          onRetry: () => ref.invalidate(reportsProvider),
         ),
         _ => const Column(
           children: [

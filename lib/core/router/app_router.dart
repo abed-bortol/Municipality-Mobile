@@ -8,6 +8,9 @@ import 'package:municipality/features/auth/presentation/auth_controller.dart';
 import 'package:municipality/features/auth/presentation/screens/auth_screen.dart';
 import 'package:municipality/features/dashboard/presentation/dashboard_screen.dart';
 import 'package:municipality/features/more/presentation/more_screen.dart';
+import 'package:municipality/features/reports/presentation/screens/new_report_screen.dart';
+import 'package:municipality/features/reports/presentation/screens/report_details_screen.dart';
+import 'package:municipality/features/reports/presentation/screens/reports_screen.dart';
 import 'package:municipality/features/shell/presentation/app_shell.dart';
 import 'package:municipality/features/splash/presentation/app_startup_controller.dart';
 import 'package:municipality/features/splash/presentation/splash_screen.dart';
@@ -70,19 +73,17 @@ GoRouter appRouter(Ref ref) {
           StatefulShellBranch(routes: [
             GoRoute(
               path: AppRoutes.reports,
-              builder: (context, state) =>
-                  ComingSoonScreen(title: context.l10n.navReports),
+              builder: (context, state) => const ReportsScreen(),
               routes: [
                 // 'new' must come before ':id'.
                 GoRoute(
                   path: 'new',
-                  builder: (context, state) =>
-                      ComingSoonScreen(title: context.l10n.submitIncident),
+                  builder: (context, state) => const NewReportScreen(),
                 ),
                 GoRoute(
                   path: ':id',
                   builder: (context, state) =>
-                      ComingSoonScreen(title: context.l10n.allReports),
+                      ReportDetailsScreen(id: state.pathParameters['id']!),
                 ),
               ],
             ),
