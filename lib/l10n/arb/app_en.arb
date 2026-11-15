@@ -121,5 +121,105 @@
   "categoryRodentPestProblem": "Rodent/Pest Problem",
   "categorySuspectedDiseaseOutbreak": "Suspected Disease/Outbreak",
   "categoryEnvironmentalHazard": "Environmental Hazard",
-  "categoryOther": "Other"
+  "categoryOther": "Other",
+  "citizenPortalBadge": "Tripoli Citizen Public Health Portal",
+  "welcomeBack": "Welcome back, {name}",
+  "@welcomeBack": {
+    "placeholders": {
+      "name": {
+        "type": "String"
+      }
+    }
+  },
+  "citizenHeroBody": "Report sanitary, water, food safety, and environmental concerns directly to the Tripoli Municipal Health Directorate. Track municipal field investigations in real-time.",
+  "trackMySubmissions": "Track My Submissions ({count})",
+  "@trackMySubmissions": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "mySubmittedReports": "My Submitted Reports",
+  "underActiveInspection": "Under Active Inspection",
+  "resolvedRemediated": "Resolved & Remediated",
+  "myRecentReports": "My Recent Incident Reports & Tracking",
+  "viewAll": "View All ({count})",
+  "@viewAll": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "noReportsYet": "You haven't filed any public health complaints yet.",
+  "reportIssueCta": "Report an Issue in Your Neighborhood",
+  "totalReports": "Total Reports",
+  "cityJurisdiction": "Greater Tripoli",
+  "reportsToday": "Reports Today",
+  "thisWeek": "{count} this week",
+  "@thisWeek": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "criticalRisk": "Critical Risk",
+  "immediateDispatch": "Immediate dispatch",
+  "highRisk": "High Risk",
+  "priorityInspection": "Priority inspection",
+  "underInspection": "In Investigation",
+  "activeFieldTeams": "Active field teams",
+  "resolutionRate": "Resolution Rate",
+  "remediatedCount": "{count} remediated",
+  "@remediatedCount": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "liveTripoliView": "Live Tripoli Epidemiological Map View",
+  "liveMapHint": "Incidents, clusters and risk levels across Tripoli districts",
+  "fullScreenMap": "Full Screen Map",
+  "detectedClusters": "Detected Clusters",
+  "noActiveClusters": "No active clusters detected",
+  "systemScansAutomatically": "System scans reports automatically",
+  "affectedCitizens": "~{count} citizens",
+  "@affectedCitizens": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "officerQuickActions": "Officer Quick Actions",
+  "reviewQueue": "Review queue",
+  "labLogs": "Lab logs & results",
+  "activeAlerts": "Active Alerts",
+  "dispatches": "Dispatches",
+  "printableBrief": "Printable brief",
+  "priorityQueue": "Priority Triage Queue",
+  "awaitingTriage": "Newly submitted incidents ranked by algorithmic risk score",
+  "manageAllReports": "Manage All Reports",
+  "triageQueueClear": "No reports are waiting for triage.",
+  "riskScore": "Risk {score}",
+  "@riskScore": {
+    "placeholders": {
+      "score": {
+        "type": "int"
+      }
+    }
+  },
+  "affectedPeople": "{count} affected",
+  "@affectedPeople": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "loadError": "Couldn't load the data.",
+  "refresh": "Refresh"
 }

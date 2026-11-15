@@ -67,8 +67,26 @@ GoRouter appRouter(Ref ref) {
         // Must follow ShellTab order.
         branches: [
           _tab(AppRoutes.dashboard, (_) => const DashboardScreen()),
-          _tab(AppRoutes.reports,
-              (l10n) => ComingSoonScreen(title: l10n.navReports)),
+          StatefulShellBranch(routes: [
+            GoRoute(
+              path: AppRoutes.reports,
+              builder: (context, state) =>
+                  ComingSoonScreen(title: context.l10n.navReports),
+              routes: [
+                // 'new' must come before ':id'.
+                GoRoute(
+                  path: 'new',
+                  builder: (context, state) =>
+                      ComingSoonScreen(title: context.l10n.submitIncident),
+                ),
+                GoRoute(
+                  path: ':id',
+                  builder: (context, state) =>
+                      ComingSoonScreen(title: context.l10n.allReports),
+                ),
+              ],
+            ),
+          ]),
           _tab(AppRoutes.map, (l10n) => ComingSoonScreen(title: l10n.tripoliMap)),
           _tab(AppRoutes.alerts,
               (l10n) => ComingSoonScreen(title: l10n.surveillanceAlerts)),

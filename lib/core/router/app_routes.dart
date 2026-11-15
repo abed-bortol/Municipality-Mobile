@@ -36,6 +36,10 @@ abstract final class AppRoutes {
   static const notices = '/notices';
   static const more = '/more';
 
+  // Under "Reports"
+  static const newReport = '/reports/new';
+  static String reportDetails(String id) => '/reports/$id';
+
   // Under "More"
   static const investigations = '/more/investigations';
   static const clusters = '/more/clusters';
