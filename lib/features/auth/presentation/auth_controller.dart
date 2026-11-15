@@ -24,10 +24,11 @@ class AuthController extends _$AuthController {
     // only an explicit 401/403 from the server signs them out.
     try {
       return AuthState.authenticated(await repo.fetchCurrentUser());
-    } on ServerException catch (e) when (e.isAuthError) {
-      await repo.signOut();
-      return const AuthState.unauthenticated();
-    } on ApiException {
+    } on ApiException catch (e) {
+      if (e is ServerException && e.isAuthError) {
+        await repo.signOut();
+        return const AuthState.unauthenticated();
+      }
       return AuthState.authenticated(cached);
     }
   }
