@@ -40,6 +40,8 @@ abstract final class AppRoutes {
   // Under "Reports"
   static const newReport = '/reports/new';
   static String reportDetails(String id) => '/reports/$id';
+  static String reportInvestigation(String id) =>
+      '/reports/$id/investigation';
 
   // Under "More"
   static const investigations = '/more/investigations';
@@ -68,7 +70,13 @@ abstract final class AppRoutes {
         location == route || location.startsWith('$route/');
 
     if (_adminOnly.any(under)) return role == UserRole.administrator;
-    if (_staffOnly.any(under)) return role != UserRole.citizen;
+    if (_staffOnly.any(under) || _investigationForm.hasMatch(location)) {
+      return role != UserRole.citizen;
+    }
     return true;
   }
+
+  /// `/reports/:id/investigation` (the report itself is open to citizens).
+  static final _investigationForm =
+      RegExp(r'^/reports/[^/]+/investigation$');
 }
