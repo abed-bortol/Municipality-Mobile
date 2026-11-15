@@ -1,4 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_map/flutter_map.dart';
+import 'package:municipality/features/dashboard/domain/dashboard_stats.dart';
+import 'package:municipality/features/dashboard/presentation/widgets/staff_dashboard.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:municipality/core/domain/risk_level.dart';
@@ -15,15 +18,14 @@ Report _report(
   ReportStatus status, {
   RiskLevel risk = RiskLevel.low,
   double score = 0,
-}) =>
-    Report(
-      id: id,
-      reportNumber: 'TRP-$id',
-      title: 'Report $id',
-      status: status,
-      riskLevel: risk,
-      riskScore: score,
-    );
+}) => Report(
+  id: id,
+  reportNumber: 'TRP-$id',
+  title: 'Report $id',
+  status: status,
+  riskLevel: risk,
+  riskScore: score,
+);
 
 void main() {
   group('priorityTriageQueue', () {
@@ -31,11 +33,19 @@ void main() {
       final queue = priorityTriageQueue([
         _report('a', ReportStatus.submitted, score: 20),
         _report('b', ReportStatus.underReview, score: 60),
-        _report('c', ReportStatus.inInvestigation,
-            risk: RiskLevel.critical, score: 90),
+        _report(
+          'c',
+          ReportStatus.inInvestigation,
+          risk: RiskLevel.critical,
+          score: 90,
+        ),
         _report('d', ReportStatus.inInvestigation, score: 99),
-        _report('e', ReportStatus.resolved,
-            risk: RiskLevel.critical, score: 95),
+        _report(
+          'e',
+          ReportStatus.resolved,
+          risk: RiskLevel.critical,
+          score: 95,
+        ),
       ]);
 
       expect(queue.map((r) => r.id), ['c', 'b', 'a']);
@@ -49,8 +59,66 @@ void main() {
     });
   });
 
-  testWidgets('citizen dashboard shows counters and recent reports',
-      (tester) async {
+  testWidgets(
+    'staff Home keeps data while scrolling and renders a map preview',
+    (tester) async {
+      var statsCalls = 0;
+      var clusterCalls = 0;
+      var reportCalls = 0;
+      await tester.pumpWidget(
+        ProviderScope(
+          overrides: [
+            dashboardStatsProvider.overrideWith((_) async {
+              statsCalls++;
+              return const DashboardStats(totalReports: 27);
+            }),
+            activeClustersProvider.overrideWith((_) async {
+              clusterCalls++;
+              return [];
+            }),
+            reportsProvider.overrideWith((_) async {
+              reportCalls++;
+              return const ReportsPage(
+                reports: [],
+                total: 0,
+                page: 1,
+                totalPages: 1,
+              );
+            }),
+          ],
+          child: const MaterialApp(
+            locale: Locale('en'),
+            supportedLocales: AppLocalizations.supportedLocales,
+            localizationsDelegates: AppLocalizations.localizationsDelegates,
+            home: Scaffold(body: StaffDashboard()),
+          ),
+        ),
+      );
+      await tester.pumpAndSettle();
+      expect(find.text('27'), findsOneWidget);
+      await tester.scrollUntilVisible(find.byType(FlutterMap), 200);
+      expect(find.byType(TileLayer), findsOneWidget);
+      final scroll = tester.state<ScrollableState>(
+        find.byType(Scrollable).first,
+      );
+      scroll.position.jumpTo(scroll.position.maxScrollExtent);
+      await tester.pumpAndSettle();
+      // Let auto-disposal run while the metrics and map are off screen.
+      await tester.pump(const Duration(seconds: 1));
+      scroll.position.jumpTo(0);
+      await tester.pumpAndSettle();
+      expect(find.text('27'), findsOneWidget);
+      expect(statsCalls, 1);
+      expect(clusterCalls, 1);
+      expect(reportCalls, 1);
+      await tester.pumpWidget(const SizedBox());
+      await tester.pumpAndSettle();
+    },
+  );
+
+  testWidgets('citizen dashboard shows counters and recent reports', (
+    tester,
+  ) async {
     final reports = [
       _report('1', ReportStatus.submitted),
       _report('2', ReportStatus.inInvestigation),
@@ -59,24 +127,30 @@ void main() {
       _report('5', ReportStatus.closed),
     ];
 
-    await tester.pumpWidget(ProviderScope(
-      overrides: [
-        reportsProvider.overrideWith((_) async => ReportsPage(
+    await tester.pumpWidget(
+      ProviderScope(
+        overrides: [
+          reportsProvider.overrideWith(
+            (_) async => ReportsPage(
               reports: reports,
               total: reports.length,
               page: 1,
               totalPages: 1,
-            )),
-      ],
-      child: const MaterialApp(
-        locale: Locale('en'),
-        supportedLocales: AppLocalizations.supportedLocales,
-        localizationsDelegates: AppLocalizations.localizationsDelegates,
-        home: Scaffold(
-          body: CitizenDashboard(user: User(id: 'u1', name: 'Samer')),
+            ),
+          ),
+        ],
+        child: const MaterialApp(
+          locale: Locale('en'),
+          supportedLocales: AppLocalizations.supportedLocales,
+          localizationsDelegates: AppLocalizations.localizationsDelegates,
+          home: Scaffold(
+            body: CitizenDashboard(
+              user: User(id: 'u1', name: 'Samer'),
+            ),
+          ),
         ),
       ),
-    ));
+    );
     await tester.pumpAndSettle();
 
     expect(find.text('Welcome back, Samer'), findsOneWidget);

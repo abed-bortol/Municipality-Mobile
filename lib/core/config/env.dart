@@ -6,7 +6,7 @@
 abstract final class Env {
   static const apiBaseUrl = String.fromEnvironment(
     'API_URL',
-    defaultValue: 'http://192.168.1.7:5050/api',
+    defaultValue: 'http://192.168.1.7:5001/api',
   );
 
   static const apiTimeout = Duration(seconds: 15);

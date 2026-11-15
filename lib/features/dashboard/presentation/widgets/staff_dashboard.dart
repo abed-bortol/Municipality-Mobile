@@ -1,4 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_map/flutter_map.dart';
+import 'package:latlong2/latlong.dart';
+import 'package:municipality/features/map/domain/district_areas.dart';
+import 'package:municipality/features/map/presentation/widgets/base_map_tiles.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 import 'package:municipality/core/router/app_routes.dart';
@@ -27,6 +31,12 @@ class StaffDashboard extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
+    // ListView disposes off-screen sections. Keep their data subscribed for
+    // the lifetime of Home so scrolling does not trigger new requests.
+    ref.listen(dashboardStatsProvider, (_, _) {});
+    ref.listen(activeClustersProvider, (_, _) {});
+    ref.listen(reportsProvider, (_, _) {});
+
     // Failures are shown per section, so the spinner just stops.
     Future<void> refresh() => Future.wait([
       ref.refresh(dashboardStatsProvider.future),
@@ -123,11 +133,11 @@ class _Metrics extends ConsumerWidget {
   );
 }
 
-class _MapCard extends StatelessWidget {
+class _MapCard extends ConsumerWidget {
   const _MapCard();
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
     final l10n = context.l10n;
 
     return SectionCard(
@@ -144,26 +154,74 @@ class _MapCard extends StatelessWidget {
         child: InkWell(
           onTap: () => context.go(AppRoutes.map),
           child: SizedBox(
-            height: 120,
+            height: 200,
             child: Stack(
               alignment: Alignment.center,
               children: [
-                const Positioned.fill(
-                  child: CustomPaint(painter: _GridPainter()),
-                ),
-                Row(
-                  mainAxisSize: MainAxisSize.min,
-                  children: [
-                    const Icon(Icons.fullscreen, color: AppColors.teal300),
-                    const SizedBox(width: 8),
-                    Text(
-                      l10n.fullScreenMap,
-                      style: Theme.of(context).textTheme.labelLarge?.copyWith(
-                        color: AppColors.teal300,
-                        fontWeight: FontWeight.w700,
+                Positioned.fill(
+                  child: IgnorePointer(
+                    child: FlutterMap(
+                      options: MapOptions(
+                        initialCenter: tripoliCenterLatLng,
+                        initialZoom: 12.5,
+                        interactionOptions: const InteractionOptions(
+                          flags: InteractiveFlag.none,
+                        ),
                       ),
+                      children: [
+                        ...baseMapLayers(MapStyle.osm).take(1),
+                        MarkerLayer(
+                          markers: [
+                            for (final report
+                                in ref.watch(reportsProvider).value?.reports ??
+                                    const <Report>[])
+                              if (report.location.lat != 0 &&
+                                  report.location.lng != 0)
+                                Marker(
+                                  point: LatLng(
+                                    report.location.lat,
+                                    report.location.lng,
+                                  ),
+                                  width: 20,
+                                  height: 20,
+                                  child: Icon(
+                                    Icons.location_on,
+                                    size: 20,
+                                    color: RiskBadge.colorOf(report.riskLevel),
+                                  ),
+                                ),
+                          ],
+                        ),
+                        ...baseMapLayers(MapStyle.osm).skip(1),
+                      ],
                     ),
-                  ],
+                  ),
+                ),
+                Positioned(
+                  top: 8,
+                  right: 8,
+                  child: Container(
+                    padding: const EdgeInsets.all(8),
+                    decoration: BoxDecoration(
+                      color: AppColors.slate950.withValues(alpha: 0.9),
+                      borderRadius: BorderRadius.circular(8),
+                    ),
+                    child: Row(
+                      mainAxisSize: MainAxisSize.min,
+                      children: [
+                        const Icon(Icons.fullscreen, color: AppColors.teal300),
+                        const SizedBox(width: 8),
+                        Text(
+                          l10n.fullScreenMap,
+                          style: Theme.of(context).textTheme.labelLarge
+                              ?.copyWith(
+                                color: AppColors.teal300,
+                                fontWeight: FontWeight.w700,
+                              ),
+                        ),
+                      ],
+                    ),
+                  ),
                 ),
               ],
             ),
@@ -172,36 +230,6 @@ class _MapCard extends StatelessWidget {
       ),
     );
   }
-}
-
-/// Faint map-like grid behind the map shortcut.
-class _GridPainter extends CustomPainter {
-  const _GridPainter();
-
-  @override
-  void paint(Canvas canvas, Size size) {
-    final line = Paint()
-      ..color = AppColors.teal800.withValues(alpha: 0.35)
-      ..strokeWidth = 1;
-    for (var x = 0.0; x < size.width; x += 24) {
-      canvas.drawLine(Offset(x, 0), Offset(x, size.height), line);
-    }
-    for (var y = 0.0; y < size.height; y += 24) {
-      canvas.drawLine(Offset(0, y), Offset(size.width, y), line);
-    }
-    final dot = Paint()..color = AppColors.rose400.withValues(alpha: 0.5);
-    for (final (dx, dy, r) in const [
-      (0.22, 0.35, 6.0),
-      (0.7, 0.3, 9.0),
-      (0.82, 0.72, 5.0),
-      (0.35, 0.75, 7.0),
-    ]) {
-      canvas.drawCircle(Offset(size.width * dx, size.height * dy), r, dot);
-    }
-  }
-
-  @override
-  bool shouldRepaint(_GridPainter oldDelegate) => false;
 }
 
 class _Clusters extends ConsumerWidget {
