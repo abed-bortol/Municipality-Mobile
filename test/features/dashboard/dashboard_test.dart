@@ -4,6 +4,7 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:municipality/core/domain/risk_level.dart';
 import 'package:municipality/features/auth/domain/user.dart';
 import 'package:municipality/features/dashboard/presentation/dashboard_providers.dart';
+import 'package:municipality/features/reports/presentation/reports_providers.dart';
 import 'package:municipality/features/dashboard/presentation/widgets/citizen_dashboard.dart';
 import 'package:municipality/features/reports/domain/report.dart';
 import 'package:municipality/features/reports/domain/reports_query.dart';
@@ -60,7 +61,7 @@ void main() {
 
     await tester.pumpWidget(ProviderScope(
       overrides: [
-        dashboardReportsProvider.overrideWith((_) async => ReportsPage(
+        reportsProvider.overrideWith((_) async => ReportsPage(
               reports: reports,
               total: reports.length,
               page: 1,
