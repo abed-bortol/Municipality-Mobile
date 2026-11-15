@@ -41,3 +41,8 @@ app.*.map.json
 # Local environment
 .env
 *.local
+
+# Generated code
+*.g.dart
+*.freezed.dart
+/lib/l10n/generated/

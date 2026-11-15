@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:municipality/core/l10n/app_strings.dart';
+import 'package:municipality/l10n/l10n.dart';
 
 /// Password input with a show/hide toggle. Always LTR, no suggestions.
 class PasswordField extends StatefulWidget {
@@ -29,7 +29,7 @@ class _PasswordFieldState extends State<PasswordField> {
 
   @override
   Widget build(BuildContext context) {
-    final s = AppStrings.of(context);
+    final l10n = context.l10n;
 
     return TextFormField(
       controller: widget.controller,
@@ -46,7 +46,7 @@ class _PasswordFieldState extends State<PasswordField> {
         hintText: '••••••••',
         prefixIcon: const Icon(Icons.lock_outline),
         suffixIcon: IconButton(
-          tooltip: _obscured ? s.showPassword : s.hidePassword,
+          tooltip: _obscured ? l10n.showPassword : l10n.hidePassword,
           icon: Icon(_obscured
               ? Icons.visibility_outlined
               : Icons.visibility_off_outlined),

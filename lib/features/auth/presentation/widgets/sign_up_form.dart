@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:municipality/core/l10n/app_strings.dart';
+import 'package:municipality/core/constants/tripoli_districts.dart';
+import 'package:municipality/l10n/l10n.dart';
 import 'package:municipality/core/theme/app_colors.dart';
 import 'package:municipality/core/widgets/app_messenger.dart';
 import 'package:municipality/core/widgets/error_banner.dart';
@@ -31,7 +32,7 @@ class _SignUpFormState extends ConsumerState<SignUpForm> {
   final _phone = TextEditingController(text: _phonePrefix);
   final _password = TextEditingController();
   final _confirmPassword = TextEditingController();
-  String _district = AppStrings.districts.first;
+  String _district = tripoliDistricts.first;
 
   AutovalidateMode _autovalidate = AutovalidateMode.disabled;
   bool _submitting = false;
@@ -46,7 +47,7 @@ class _SignUpFormState extends ConsumerState<SignUpForm> {
   }
 
   Future<void> _submit() async {
-    final s = AppStrings.of(context);
+    final l10n = context.l10n;
     setState(() {
       _error = null;
       _autovalidate = AutovalidateMode.onUserInteraction;
@@ -65,9 +66,9 @@ class _SignUpFormState extends ConsumerState<SignUpForm> {
             password: _password.text,
           ));
       TextInput.finishAutofillContext();
-      showAppSnackBar(s.signUpSuccess);
+      showAppSnackBar(l10n.signUpSuccess);
     } on Object catch (e) {
-      if (mounted) setState(() => _error = authErrorMessage(e, s));
+      if (mounted) setState(() => _error = authErrorMessage(e, l10n));
     } finally {
       if (mounted) setState(() => _submitting = false);
     }
@@ -75,7 +76,7 @@ class _SignUpFormState extends ConsumerState<SignUpForm> {
 
   @override
   Widget build(BuildContext context) {
-    final s = AppStrings.of(context);
+    final l10n = context.l10n;
 
     return Form(
       key: _formKey,
@@ -90,11 +91,11 @@ class _SignUpFormState extends ConsumerState<SignUpForm> {
               textInputAction: TextInputAction.next,
               autofillHints: const [AutofillHints.name],
               decoration: InputDecoration(
-                labelText: s.fullName,
-                hintText: s.fullNameHint,
+                labelText: l10n.fullName,
+                hintText: l10n.fullNameHint,
                 prefixIcon: const Icon(Icons.person_outline),
               ),
-              validator: (v) => AuthValidators.name(v, s),
+              validator: (v) => AuthValidators.name(v, l10n),
             ),
             const SizedBox(height: 14),
             EmailField(controller: widget.emailController),
@@ -106,7 +107,7 @@ class _SignUpFormState extends ConsumerState<SignUpForm> {
               textDirection: TextDirection.ltr,
               autofillHints: const [AutofillHints.telephoneNumber],
               decoration: InputDecoration(
-                labelText: '${s.phone} (${s.optional})',
+                labelText: '${l10n.phone} (${l10n.optional})',
                 hintText: '+961 0 123456',
                 prefixIcon: const Icon(Icons.phone_outlined),
               ),
@@ -118,39 +119,39 @@ class _SignUpFormState extends ConsumerState<SignUpForm> {
               dropdownColor: AppColors.slate800,
               borderRadius: BorderRadius.circular(12),
               decoration: InputDecoration(
-                labelText: s.district,
+                labelText: l10n.district,
                 prefixIcon: const Icon(Icons.location_on_outlined),
               ),
               items: [
-                for (final d in AppStrings.districts)
-                  DropdownMenuItem(value: d, child: Text(s.districtName(d))),
+                for (final d in tripoliDistricts)
+                  DropdownMenuItem(value: d, child: Text(l10n.districtName(d))),
               ],
               onChanged: (v) => setState(() => _district = v ?? _district),
             ),
             const SizedBox(height: 14),
             PasswordField(
               controller: _password,
-              label: s.password,
+              label: l10n.password,
               autofillHint: AutofillHints.newPassword,
               textInputAction: TextInputAction.next,
-              validator: (v) => AuthValidators.newPassword(v, s),
+              validator: (v) => AuthValidators.newPassword(v, l10n),
             ),
             const SizedBox(height: 14),
             PasswordField(
               controller: _confirmPassword,
-              label: s.confirmPassword,
+              label: l10n.confirmPassword,
               autofillHint: AutofillHints.newPassword,
               textInputAction: TextInputAction.done,
               onSubmitted: _submit,
               validator: (v) =>
-                  v != _password.text ? s.errPasswordMismatch : null,
+                  v != _password.text ? l10n.errPasswordMismatch : null,
             ),
             const SizedBox(height: 22),
             PrimaryButton(
-              label: s.createAccountAndEnter,
+              label: l10n.createAccountAndEnter,
               icon: Icons.person_add_alt_1,
               loading: _submitting,
-              loadingLabel: s.creatingAccount,
+              loadingLabel: l10n.creatingAccount,
               onPressed: _submit,
             ),
           ],

@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:municipality/core/l10n/app_strings.dart';
+import 'package:municipality/l10n/l10n.dart';
 import 'package:municipality/core/theme/app_colors.dart';
 import 'package:municipality/core/widgets/brand_logo.dart';
 import 'package:municipality/features/settings/presentation/widgets/language_toggle.dart';
@@ -10,7 +10,7 @@ class AuthHeader extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final s = AppStrings.of(context);
+    final l10n = context.l10n;
     final textTheme = Theme.of(context).textTheme;
 
     return Padding(
@@ -24,7 +24,7 @@ class AuthHeader extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Text(
-                  s.appTitle,
+                  l10n.appTitle,
                   overflow: TextOverflow.ellipsis,
                   style: textTheme.titleSmall?.copyWith(
                     fontWeight: FontWeight.w900,
@@ -32,7 +32,7 @@ class AuthHeader extends StatelessWidget {
                   ),
                 ),
                 Text(
-                  s.directorate,
+                  l10n.directorate,
                   overflow: TextOverflow.ellipsis,
                   style: textTheme.labelSmall?.copyWith(
                     color: AppColors.teal400,

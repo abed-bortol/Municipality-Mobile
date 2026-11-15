@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
-import 'package:municipality/core/l10n/app_strings.dart';
+import 'package:municipality/l10n/l10n.dart';
 import 'package:municipality/core/router/app_routes.dart';
 import 'package:municipality/features/auth/domain/auth_state.dart';
 import 'package:municipality/features/auth/domain/user.dart';
@@ -16,7 +16,7 @@ class AppShell extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final s = AppStrings.of(context);
+    final l10n = context.l10n;
     final role = switch (ref.watch(authControllerProvider).value) {
       Authenticated(:final user) => user.role,
       _ => UserRole.citizen,
@@ -38,34 +38,34 @@ class AppShell extends ConsumerWidget {
           );
         },
         destinations: [
-          for (final tab in tabs) _destination(tab, role, s),
+          for (final tab in tabs) _destination(tab, role, l10n),
         ],
       ),
     );
   }
 
-  NavigationDestination _destination(ShellTab tab, UserRole role, AppStrings s) {
+  NavigationDestination _destination(ShellTab tab, UserRole role, AppLocalizations l10n) {
     final (icon, selectedIcon, label) = switch (tab) {
       ShellTab.dashboard => (
           Icons.dashboard_outlined,
           Icons.dashboard,
-          s.navHome,
+          l10n.navHome,
         ),
       ShellTab.reports => (
           Icons.description_outlined,
           Icons.description,
-          role == UserRole.citizen ? s.navMyReports : s.navReports,
+          role == UserRole.citizen ? l10n.navMyReports : l10n.navReports,
         ),
-      ShellTab.map => (Icons.map_outlined, Icons.map, s.navMap),
+      ShellTab.map => (Icons.map_outlined, Icons.map, l10n.navMap),
       ShellTab.alerts => (
           Icons.notifications_active_outlined,
           Icons.notifications_active,
-          s.navAlerts,
+          l10n.navAlerts,
         ),
-      ShellTab.notices => (Icons.campaign_outlined, Icons.campaign, s.navNotices),
+      ShellTab.notices => (Icons.campaign_outlined, Icons.campaign, l10n.navNotices),
       ShellTab.more => role == UserRole.citizen
-          ? (Icons.person_outline, Icons.person, s.navAccount)
-          : (Icons.menu, Icons.menu_open, s.navMore),
+          ? (Icons.person_outline, Icons.person, l10n.navAccount)
+          : (Icons.menu, Icons.menu_open, l10n.navMore),
     };
 
     return NavigationDestination(
