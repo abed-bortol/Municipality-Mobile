@@ -4,11 +4,10 @@ import 'package:shared_preferences/shared_preferences.dart';
 
 part 'storage_providers.g.dart';
 
-/// Encrypted storage for secrets (JWT).
+/// Encrypted storage for secrets (JWT): Keychain on iOS, AES-GCM with
+/// Keystore-wrapped keys on Android (the package default since v10).
 @Riverpod(keepAlive: true)
-FlutterSecureStorage secureStorage(Ref ref) => const FlutterSecureStorage(
-      aOptions: AndroidOptions(encryptedSharedPreferences: true),
-    );
+FlutterSecureStorage secureStorage(Ref ref) => const FlutterSecureStorage();
 
 /// Plain preferences (language). Loaded in `main()` before the first frame
 /// and injected with `sharedPreferencesProvider.overrideWithValue(...)`.

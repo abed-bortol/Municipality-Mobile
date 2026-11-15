@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:municipality/core/l10n/app_strings.dart';
+import 'package:municipality/l10n/l10n.dart';
 import 'package:municipality/core/widgets/app_messenger.dart';
 import 'package:municipality/core/widgets/error_banner.dart';
 import 'package:municipality/core/widgets/primary_button.dart';
@@ -36,7 +36,7 @@ class _SignInFormState extends ConsumerState<SignInForm> {
   }
 
   Future<void> _submit() async {
-    final s = AppStrings.of(context);
+    final l10n = context.l10n;
     setState(() {
       _error = null;
       _autovalidate = AutovalidateMode.onUserInteraction;
@@ -52,9 +52,9 @@ class _SignInFormState extends ConsumerState<SignInForm> {
           );
       // Lets the OS offer to save the credentials in the password manager.
       TextInput.finishAutofillContext();
-      showAppSnackBar(s.signInSuccess);
+      showAppSnackBar(l10n.signInSuccess);
     } on Object catch (e) {
-      if (mounted) setState(() => _error = authErrorMessage(e, s));
+      if (mounted) setState(() => _error = authErrorMessage(e, l10n));
     } finally {
       if (mounted) setState(() => _submitting = false);
     }
@@ -62,7 +62,7 @@ class _SignInFormState extends ConsumerState<SignInForm> {
 
   @override
   Widget build(BuildContext context) {
-    final s = AppStrings.of(context);
+    final l10n = context.l10n;
 
     return Form(
       key: _formKey,
@@ -75,18 +75,18 @@ class _SignInFormState extends ConsumerState<SignInForm> {
             const SizedBox(height: 14),
             PasswordField(
               controller: _password,
-              label: s.password,
+              label: l10n.password,
               autofillHint: AutofillHints.password,
               textInputAction: TextInputAction.done,
               onSubmitted: _submit,
-              validator: (v) => AuthValidators.requiredPassword(v, s),
+              validator: (v) => AuthValidators.requiredPassword(v, l10n),
             ),
             const SizedBox(height: 22),
             PrimaryButton(
-              label: s.signIn,
+              label: l10n.signIn,
               icon: Icons.login,
               loading: _submitting,
-              loadingLabel: s.signingIn,
+              loadingLabel: l10n.signingIn,
               onPressed: _submit,
             ),
           ],

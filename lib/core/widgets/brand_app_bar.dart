@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:municipality/core/l10n/app_strings.dart';
+import 'package:municipality/l10n/l10n.dart';
 import 'package:municipality/core/theme/app_colors.dart';
 import 'package:municipality/core/widgets/brand_logo.dart';
 
@@ -15,7 +15,7 @@ class BrandAppBar extends StatelessWidget implements PreferredSizeWidget {
 
   @override
   Widget build(BuildContext context) {
-    final s = AppStrings.of(context);
+    final l10n = context.l10n;
     final textTheme = Theme.of(context).textTheme;
 
     return AppBar(
@@ -26,7 +26,7 @@ class BrandAppBar extends StatelessWidget implements PreferredSizeWidget {
           const SizedBox(width: 10),
           Flexible(
             child: Text(
-              s.appTitle,
+              l10n.appTitle,
               overflow: TextOverflow.ellipsis,
               style:
                   textTheme.titleMedium?.copyWith(fontWeight: FontWeight.w700),
@@ -41,7 +41,7 @@ class BrandAppBar extends StatelessWidget implements PreferredSizeWidget {
               border: Border.all(color: AppColors.teal800.withValues(alpha: 0.8)),
             ),
             child: Text(
-              s.isAr ? s.country : s.country.toUpperCase(),
+              context.isArabic ? l10n.country : l10n.country.toUpperCase(),
               style: textTheme.labelSmall?.copyWith(
                 color: AppColors.teal300,
                 fontWeight: FontWeight.w700,

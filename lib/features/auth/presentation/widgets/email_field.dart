@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:municipality/core/l10n/app_strings.dart';
+import 'package:municipality/l10n/l10n.dart';
 import 'package:municipality/features/auth/presentation/widgets/auth_validators.dart';
 
 class EmailField extends StatelessWidget {
@@ -9,7 +9,7 @@ class EmailField extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final s = AppStrings.of(context);
+    final l10n = context.l10n;
 
     return TextFormField(
       controller: controller,
@@ -19,11 +19,11 @@ class EmailField extends StatelessWidget {
       autocorrect: false,
       autofillHints: const [AutofillHints.email, AutofillHints.username],
       decoration: InputDecoration(
-        labelText: s.email,
+        labelText: l10n.email,
         hintText: 'your.email@tripoli.lb',
         prefixIcon: const Icon(Icons.mail_outline),
       ),
-      validator: (v) => AuthValidators.email(v, s),
+      validator: (v) => AuthValidators.email(v, l10n),
     );
   }
 }

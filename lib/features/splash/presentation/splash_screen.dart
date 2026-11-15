@@ -2,7 +2,7 @@ import 'dart:async';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:municipality/core/l10n/app_strings.dart';
+import 'package:municipality/l10n/l10n.dart';
 import 'package:municipality/core/theme/app_colors.dart';
 import 'package:municipality/core/widgets/brand_logo.dart';
 import 'package:municipality/features/splash/presentation/app_startup_controller.dart';
@@ -102,7 +102,7 @@ class _SplashScreenState extends ConsumerState<SplashScreen>
 
   @override
   Widget build(BuildContext context) {
-    final s = AppStrings.of(context);
+    final l10n = context.l10n;
     final textTheme = Theme.of(context).textTheme;
     const logoSize = SplashScreen.logoSize;
 
@@ -112,7 +112,7 @@ class _SplashScreenState extends ConsumerState<SplashScreen>
         container: true,
         liveRegion: true,
         excludeSemantics: true,
-        label: '${s.appTitle}. ${s.loading}',
+        label: '${l10n.appTitle}. ${l10n.loading}',
         child: LayoutBuilder(
           builder: (context, constraints) {
             // Logo is centered on the full window, exactly like the native splash.
@@ -124,7 +124,7 @@ class _SplashScreenState extends ConsumerState<SplashScreen>
                 Center(
                   child: AnimatedBuilder(
                     animation: _glow,
-                    builder: (_, __) =>
+                    builder: (_, _) =>
                         BrandLogo(size: logoSize, glow: _glow.value),
                   ),
                 ),
@@ -143,17 +143,17 @@ class _SplashScreenState extends ConsumerState<SplashScreen>
                             shaderCallback: (bounds) =>
                                 AppColors.titleGradient.createShader(bounds),
                             child: Text(
-                              s.appTitle,
+                              l10n.appTitle,
                               textAlign: TextAlign.center,
                               style: textTheme.headlineSmall?.copyWith(
                                 fontWeight: FontWeight.w800,
-                                letterSpacing: s.isAr ? 0 : -0.5,
+                                letterSpacing: context.isArabic ? 0 : -0.5,
                               ),
                             ),
                           ),
                           const SizedBox(height: 8),
                           Text(
-                            s.appSubtitle,
+                            l10n.appSubtitle,
                             textAlign: TextAlign.center,
                             style: textTheme.bodyMedium?.copyWith(
                               color: AppColors.slate400,
@@ -191,12 +191,12 @@ class _SplashScreenState extends ConsumerState<SplashScreen>
                           ),
                           const SizedBox(height: 20),
                           Text(
-                            '${s.municipality} • ${s.country}',
+                            '${l10n.municipality} • ${l10n.country}',
                             textAlign: TextAlign.center,
                             style: textTheme.labelSmall?.copyWith(
                               color: AppColors.slate400,
                               fontWeight: FontWeight.w700,
-                              letterSpacing: s.isAr ? 0 : 1.2,
+                              letterSpacing: context.isArabic ? 0 : 1.2,
                             ),
                           ),
                         ],

@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
-import 'package:municipality/core/l10n/app_strings.dart';
+import 'package:municipality/l10n/l10n.dart';
 import 'package:municipality/core/router/app_routes.dart';
 import 'package:municipality/core/widgets/coming_soon.dart';
 import 'package:municipality/features/auth/domain/auth_state.dart';
@@ -68,25 +68,25 @@ GoRouter appRouter(Ref ref) {
         branches: [
           _tab(AppRoutes.dashboard, (_) => const DashboardScreen()),
           _tab(AppRoutes.reports,
-              (s) => ComingSoonScreen(title: s.navReports)),
-          _tab(AppRoutes.map, (s) => ComingSoonScreen(title: s.tripoliMap)),
+              (l10n) => ComingSoonScreen(title: l10n.navReports)),
+          _tab(AppRoutes.map, (l10n) => ComingSoonScreen(title: l10n.tripoliMap)),
           _tab(AppRoutes.alerts,
-              (s) => ComingSoonScreen(title: s.surveillanceAlerts)),
+              (l10n) => ComingSoonScreen(title: l10n.surveillanceAlerts)),
           _tab(AppRoutes.notices,
-              (s) => ComingSoonScreen(title: s.publicPortal)),
+              (l10n) => ComingSoonScreen(title: l10n.publicPortal)),
           StatefulShellBranch(routes: [
             GoRoute(
               path: AppRoutes.more,
               builder: (context, state) => const MoreScreen(),
               routes: [
-                _comingSoon(AppRoutes.investigations, (s) => s.investigations),
-                _comingSoon(AppRoutes.clusters, (s) => s.clusterDetection),
-                _comingSoon(AppRoutes.analytics, (s) => s.epidemiologyCharts),
-                _comingSoon(AppRoutes.exportDossier, (s) => s.exportDossier),
-                _comingSoon(AppRoutes.users, (s) => s.usersOfficers),
-                _comingSoon(AppRoutes.categories, (s) => s.reportCategories),
-                _comingSoon(AppRoutes.systemSettings, (s) => s.systemSettings),
-                _comingSoon(AppRoutes.auditLogs, (s) => s.auditTrail),
+                _comingSoon(AppRoutes.investigations, (l10n) => l10n.investigations),
+                _comingSoon(AppRoutes.clusters, (l10n) => l10n.clusterDetection),
+                _comingSoon(AppRoutes.analytics, (l10n) => l10n.epidemiologyCharts),
+                _comingSoon(AppRoutes.exportDossier, (l10n) => l10n.exportDossier),
+                _comingSoon(AppRoutes.users, (l10n) => l10n.usersOfficers),
+                _comingSoon(AppRoutes.categories, (l10n) => l10n.reportCategories),
+                _comingSoon(AppRoutes.systemSettings, (l10n) => l10n.systemSettings),
+                _comingSoon(AppRoutes.auditLogs, (l10n) => l10n.auditTrail),
               ],
             ),
           ]),
@@ -98,20 +98,20 @@ GoRouter appRouter(Ref ref) {
   return router;
 }
 
-StatefulShellBranch _tab(String path, Widget Function(AppStrings) screen) =>
+StatefulShellBranch _tab(String path, Widget Function(AppLocalizations) screen) =>
     StatefulShellBranch(routes: [
       GoRoute(
         path: path,
-        builder: (context, state) => screen(AppStrings.of(context)),
+        builder: (context, state) => screen(context.l10n),
       ),
     ]);
 
 /// Placeholder for screens of upcoming phases (path is relative to /more).
-GoRoute _comingSoon(String fullPath, String Function(AppStrings) title) =>
+GoRoute _comingSoon(String fullPath, String Function(AppLocalizations) title) =>
     GoRoute(
       path: fullPath.substring('${AppRoutes.more}/'.length),
       builder: (context, state) =>
-          ComingSoonScreen(title: title(AppStrings.of(context))),
+          ComingSoonScreen(title: title(context.l10n)),
     );
 
 /// Top-level screens swap with a short cross-fade (none if the user turned

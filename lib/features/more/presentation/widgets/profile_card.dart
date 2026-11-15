@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:municipality/core/l10n/app_strings.dart';
+import 'package:municipality/l10n/l10n.dart';
 import 'package:municipality/core/theme/app_colors.dart';
 import 'package:municipality/features/auth/domain/user.dart';
 
@@ -10,7 +10,7 @@ class ProfileCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final s = AppStrings.of(context);
+    final l10n = context.l10n;
     final textTheme = Theme.of(context).textTheme;
     final initial = user.name.isEmpty ? '?' : user.name.characters.first;
 
@@ -52,11 +52,11 @@ class ProfileCard extends StatelessWidget {
                   children: [
                     _Chip(
                       icon: Icons.badge_outlined,
-                      label: s.role(user.role.apiValue),
+                      label: l10n.roleLabel(user.role.apiValue),
                     ),
                     _Chip(
                       icon: Icons.location_on_outlined,
-                      label: s.districtName(user.district),
+                      label: l10n.districtName(user.district),
                     ),
                   ],
                 ),

@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:municipality/core/l10n/app_strings.dart';
+import 'package:municipality/l10n/l10n.dart';
 import 'package:municipality/core/theme/app_colors.dart';
 
 enum AuthMode { signIn, signUp }
@@ -13,7 +13,7 @@ class AuthModeTabs extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final s = AppStrings.of(context);
+    final l10n = context.l10n;
 
     return Container(
       padding: const EdgeInsets.all(4),
@@ -24,8 +24,8 @@ class AuthModeTabs extends StatelessWidget {
       ),
       child: Row(
         children: [
-          _tab(AuthMode.signIn, Icons.login, s.signIn),
-          _tab(AuthMode.signUp, Icons.person_add_alt_1, s.signUp),
+          _tab(AuthMode.signIn, Icons.login, l10n.signIn),
+          _tab(AuthMode.signUp, Icons.person_add_alt_1, l10n.signUp),
         ],
       ),
     );

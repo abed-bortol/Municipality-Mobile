@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:municipality/core/l10n/app_strings.dart';
+import 'package:municipality/l10n/l10n.dart';
 import 'package:municipality/core/theme/app_colors.dart';
 import 'package:municipality/features/auth/presentation/widgets/auth_header.dart';
 import 'package:municipality/features/auth/presentation/widgets/auth_mode_tabs.dart';
@@ -30,7 +30,7 @@ class _AuthScreenState extends State<AuthScreen> {
 
   @override
   Widget build(BuildContext context) {
-    final s = AppStrings.of(context);
+    final l10n = context.l10n;
     final textTheme = Theme.of(context).textTheme;
     final isSignIn = _mode == AuthMode.signIn;
 
@@ -64,7 +64,7 @@ class _AuthScreenState extends State<AuthScreen> {
                           child: Column(
                             children: [
                               Text(
-                                isSignIn ? s.signInTitle : s.signUpTitle,
+                                isSignIn ? l10n.signInTitle : l10n.signUpTitle,
                                 textAlign: TextAlign.center,
                                 style: textTheme.titleLarge?.copyWith(
                                   fontWeight: FontWeight.w900,
@@ -73,7 +73,7 @@ class _AuthScreenState extends State<AuthScreen> {
                               ),
                               const SizedBox(height: 6),
                               Text(
-                                isSignIn ? s.signInSubtitle : s.signUpSubtitle,
+                                isSignIn ? l10n.signInSubtitle : l10n.signUpSubtitle,
                                 textAlign: TextAlign.center,
                                 style: textTheme.bodySmall
                                     ?.copyWith(color: AppColors.slate400),
@@ -106,7 +106,7 @@ class _AuthScreenState extends State<AuthScreen> {
                     Padding(
                       padding: const EdgeInsets.fromLTRB(16, 8, 16, 16),
                       child: Text(
-                        s.footer,
+                        l10n.footer,
                         textAlign: TextAlign.center,
                         style: textTheme.labelSmall
                             ?.copyWith(color: AppColors.slate500),
