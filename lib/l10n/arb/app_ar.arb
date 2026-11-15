@@ -393,5 +393,20 @@
   "clusterResolved": "تمت المعالجة",
   "changeClusterStatus": "تغيير الحالة",
   "clusterStatusUpdated": "تم تحديث {code} إلى {status}",
-  "viewOnMap": "عرض على الخريطة"
+  "viewOnMap": "عرض على الخريطة",
+  "totalRegisteredReports": "إجمالي البلاغات المسجلة",
+  "resolutionContainmentRate": "نسبة الإنجاز واحتواء المخاطر",
+  "resolvedClosedCount": "{count} تمت معالجتها",
+  "criticalScoreHint": "درجة الخطورة ≥ 76/100",
+  "incidentDistributionByCategory": "توزيع البلاغات حسب الفئة الصحية",
+  "topReportedHazards": "أبرز المخاطر المرصودة",
+  "riskLevelDistribution": "توزيع مستويات الخطورة",
+  "algorithmicAssessment": "تقييم خوارزمي",
+  "incidentsByTripoliDistrict": "توزيع البلاغات حسب أحياء ومناطق طرابلس",
+  "geographicSpread": "الانتشار الجغرافي",
+  "investigationLifecycleStatus": "مسار ومراحل التحقيقات الميدانية",
+  "pipeline": "مراحل الإنجاز",
+  "noIncidentDataTitle": "لا توجد بيانات وبائية مسجلة حالياً",
+  "noIncidentDataBody": "قاعدة البيانات خالية من البلاغات حالياً. بمجرد تسجيل بلاغات أو إجراء فحوصات ميدانية في طرابلس، ستظهر المخططات البيانية وتوزيع المخاطر تلقائياً.",
+  "chartValue": "{label}: {count}"
 }
