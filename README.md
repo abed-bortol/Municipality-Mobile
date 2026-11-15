@@ -46,14 +46,18 @@ Feature-first, with `data / domain / presentation` layers inside each feature.
 lib/
   main.dart                    ProviderScope + SharedPreferences override
   app.dart                     MaterialApp.router, locales (en/ar + RTL), theme
+  l10n/
+    arb/app_en.arb, app_ar.arb strings (gen-l10n; mirrors website t() keys)
+    l10n.dart                  context.l10n + server value labels
   core/                        shared, feature-agnostic code
     config/env.dart            API URL (--dart-define=API_URL=...)
     network/                   dio provider, auth interceptor, ApiException
     storage/                   secure storage + shared prefs providers
-    router/app_router.dart     routes + auth redirects
-    l10n/app_strings.dart      bilingual strings (mirrors website t() keys)
+    router/                    routes, role access, auth redirects
+    domain/                    shared enums (RiskLevel)
+    utils/                     JSON readers, date formatting
     theme/                     colors + dark theme
-    widgets/                   BrandLogo, PrimaryButton, ErrorBanner, messenger
+    widgets/                   logo, buttons, cards, badges, skeletons, empty states
   features/
     auth/
       domain/                  User, AuthState, RegisterRequest (freezed), AuthRepository
@@ -61,7 +65,12 @@ lib/
       presentation/            AuthController (AsyncNotifier), AuthScreen, forms
     settings/                  language preference (LocaleController)
     splash/                    branded splash + AppStartupController
-    home/                      placeholder home (next step: role dashboards)
+    shell/                     bottom navigation per role
+    dashboard/                 citizen and staff dashboards
+    reports/                   Report model, repository, report cards and badges
+    categories/                hazard categories
+    clusters/                  detected outbreak clusters
+    more/                      profile, staff/admin sections, language, sign out
 ```
 
 Rules:
@@ -72,5 +81,5 @@ Rules:
 After changing any `@riverpod` or `@freezed` code:
 
 ```powershell
-dart run build_runner watch --delete-conflicting-outputs
+dart run build_runner watch
 ```
