@@ -492,5 +492,98 @@
         "type": "String"
       }
     }
-  }
+  },
+  "investigationsTitle": "Official Field Investigations & Laboratory Logs",
+  "investigationsDesc": "Epidemiological findings, microbiological testing, and municipal remediation orders",
+  "allResultsCount": "All Results ({count})",
+  "@allResultsCount": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "resultConfirmed": "Confirmed Hazard",
+  "resultNotConfirmed": "Not Confirmed / Safe",
+  "resultInconclusive": "Inconclusive / Pending Labs",
+  "resultResolved": "Resolved / Remediated",
+  "invStatusPending": "Pending (awaiting testing)",
+  "invStatusInProgress": "In progress (active)",
+  "invStatusCompleted": "Completed (closed record)",
+  "noInvestigationsTitle": "No Field Investigations Registered",
+  "noInvestigationsBody": "When inspectors are assigned to incidents and lab samples are collected, inspection dossiers and remedial actions will appear here.",
+  "fieldFindings": "Field Findings",
+  "containmentActions": "Containment & Actions Taken",
+  "officialDirective": "Official Directive",
+  "samplesLabel": "Samples",
+  "notesLabel": "Notes",
+  "fieldOfficer": "Field Officer",
+  "reportRef": "Ref: #{number}",
+  "@reportRef": {
+    "placeholders": {
+      "number": {
+        "type": "String"
+      }
+    }
+  },
+  "inspectLinkedIncident": "Inspect Linked Incident Report",
+  "finalizeShort": "Finalize Inspection",
+  "investigationRecordTitle": "Health Officer Field Investigation Record",
+  "relatedReport": "Related to Report: #{number}",
+  "@relatedReport": {
+    "placeholders": {
+      "number": {
+        "type": "String"
+      }
+    }
+  },
+  "oneWayInspectionTitle": "One-Way Field Inspection Protocol (Strict Forward)",
+  "oneWayInspectionBody": "Finalizing the inspection commits the investigation and advances the incident to RESOLVED. Backtracking to earlier stages is permanently disabled.",
+  "inspectionLocked": "This inspection is officially finalized ({status}). Saving updates the stored record.",
+  "@inspectionLocked": {
+    "placeholders": {
+      "status": {
+        "type": "String"
+      }
+    }
+  },
+  "investigationResult": "Investigation Result",
+  "lifecycleStatus": "Lifecycle Status",
+  "findingsHint": "Physical observations, sensory evaluation, field instrumentation readings (free chlorine, turbidity, refrigeration temp)...",
+  "actionsHint": "Immediate containment executed: valves shut off, contaminated products seized/destroyed, larvicide dispersed...",
+  "directiveHint": "Policy mandates, municipal directives, follow-up schedules, health notices...",
+  "samplesHint": "e.g., Water Tap Sample #TRP-W-401 sent to Central Laboratory",
+  "errFindingsRequired": "Please specify field findings and observations.",
+  "errActionsRequired": "Please detail actions taken or containment measures.",
+  "saveProgress": "Save Progress",
+  "saveChanges": "Save changes",
+  "saving": "Saving…",
+  "finalizeAndResolve": "Finalize Inspection & Resolve (Final)",
+  "draftSaved": "Field investigation draft updated for #{number}!",
+  "@draftSaved": {
+    "placeholders": {
+      "number": {
+        "type": "String"
+      }
+    }
+  },
+  "investigationUpdated": "Investigation record updated for #{number}.",
+  "@investigationUpdated": {
+    "placeholders": {
+      "number": {
+        "type": "String"
+      }
+    }
+  },
+  "inspectionFinalized": "Field inspection finalized and report #{number} marked RESOLVED!",
+  "@inspectionFinalized": {
+    "placeholders": {
+      "number": {
+        "type": "String"
+      }
+    }
+  },
+  "finalizeConfirmTitle": "Finalize this inspection?",
+  "finalizeConfirmBody": "The report moves to Resolved. This can't be undone.",
+  "editInspectionLog": "Edit Inspection Log"
 }

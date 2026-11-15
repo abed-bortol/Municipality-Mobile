@@ -8,6 +8,8 @@ import 'package:municipality/features/auth/domain/auth_state.dart';
 import 'package:municipality/features/auth/presentation/auth_controller.dart';
 import 'package:municipality/features/auth/presentation/screens/auth_screen.dart';
 import 'package:municipality/features/dashboard/presentation/dashboard_screen.dart';
+import 'package:municipality/features/investigations/presentation/screens/investigation_form_screen.dart';
+import 'package:municipality/features/investigations/presentation/screens/investigations_screen.dart';
 import 'package:municipality/features/more/presentation/more_screen.dart';
 import 'package:municipality/features/notifications/presentation/screens/notifications_screen.dart';
 import 'package:municipality/features/portal/presentation/public_portal_screen.dart';
@@ -92,6 +94,13 @@ GoRouter appRouter(Ref ref) {
                   path: ':id',
                   builder: (context, state) =>
                       ReportDetailsScreen(id: state.pathParameters['id']!),
+                  routes: [
+                    GoRoute(
+                      path: 'investigation',
+                      builder: (context, state) => InvestigationFormScreen(
+                          reportId: state.pathParameters['id']!),
+                    ),
+                  ],
                 ),
               ],
             ),
@@ -104,7 +113,10 @@ GoRouter appRouter(Ref ref) {
               path: AppRoutes.more,
               builder: (context, state) => const MoreScreen(),
               routes: [
-                _comingSoon(AppRoutes.investigations, (l10n) => l10n.investigations),
+                GoRoute(
+                  path: _relativeToMore(AppRoutes.investigations),
+                  builder: (context, state) => const InvestigationsScreen(),
+                ),
                 _comingSoon(AppRoutes.clusters, (l10n) => l10n.clusterDetection),
                 _comingSoon(AppRoutes.analytics, (l10n) => l10n.epidemiologyCharts),
                 _comingSoon(AppRoutes.exportDossier, (l10n) => l10n.exportDossier),
@@ -134,10 +146,13 @@ StatefulShellBranch _tab(String path, Widget Function(AppLocalizations) screen) 
 /// Placeholder for screens of upcoming phases (path is relative to /more).
 GoRoute _comingSoon(String fullPath, String Function(AppLocalizations) title) =>
     GoRoute(
-      path: fullPath.substring('${AppRoutes.more}/'.length),
+      path: _relativeToMore(fullPath),
       builder: (context, state) =>
           ComingSoonScreen(title: title(context.l10n)),
     );
+
+String _relativeToMore(String fullPath) =>
+    fullPath.substring('${AppRoutes.more}/'.length);
 
 /// Top-level screens swap with a short cross-fade (none if the user turned
 /// animations off).

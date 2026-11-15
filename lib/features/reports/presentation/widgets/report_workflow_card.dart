@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:go_router/go_router.dart';
 import 'package:municipality/core/network/api_error_message.dart';
+import 'package:municipality/core/router/app_routes.dart';
 import 'package:municipality/core/theme/app_colors.dart';
 import 'package:municipality/core/widgets/app_messenger.dart';
 import 'package:municipality/core/widgets/section_card.dart';
@@ -77,6 +79,10 @@ class _ReportWorkflowCardState extends ConsumerState<ReportWorkflowCard> {
     );
   }
 
+  static bool _opensInvestigation(ReportStatus status) =>
+      status == ReportStatus.verified ||
+      status == ReportStatus.inInvestigation;
+
   /// Null when cancelled.
   Future<String?> _askText({
     required String title,
@@ -147,10 +153,28 @@ class _ReportWorkflowCardState extends ConsumerState<ReportWorkflowCard> {
             const SizedBox(height: 10),
             if (next != null && actionLabel != null)
               FilledButton.icon(
-                onPressed: _busy ? null : () => _advance(next, actionLabel),
+                onPressed: _busy
+                    ? null
+                    : _opensInvestigation(status)
+                        // Launching / finalizing goes through the
+                        // investigation record, like the website.
+                        ? () => context
+                            .go(AppRoutes.reportInvestigation(_report.id))
+                        : () => _advance(next, actionLabel),
                 icon: const Icon(Icons.arrow_forward),
                 label: Text(actionLabel),
               ),
+            if (status == ReportStatus.inInvestigation) ...[
+              const SizedBox(height: 8),
+              OutlinedButton.icon(
+                onPressed: _busy
+                    ? null
+                    : () => context
+                        .go(AppRoutes.reportInvestigation(_report.id)),
+                icon: const Icon(Icons.edit_note),
+                label: Text(l10n.editInspectionLog),
+              ),
+            ],
             if (status.canReject) ...[
               const SizedBox(height: 8),
               OutlinedButton.icon(
