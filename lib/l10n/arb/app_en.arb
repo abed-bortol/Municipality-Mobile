@@ -585,5 +585,127 @@
   },
   "finalizeConfirmTitle": "Finalize this inspection?",
   "finalizeConfirmBody": "The report moves to Resolved. This can't be undone.",
-  "editInspectionLog": "Edit Inspection Log"
+  "editInspectionLog": "Edit Inspection Log",
+  "mapLayers": "Map layers",
+  "mapStyle": "Base map",
+  "mapStyleOsm": "OpenStreetMap",
+  "mapStyleStreets": "Streets",
+  "mapStyleDark": "Dark",
+  "mapStyleSatellite": "Satellite",
+  "clustersLayer": "Clusters ({count})",
+  "@clustersLayer": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "districtsLayer": "Districts",
+  "recenterMap": "Recenter on Greater Tripoli",
+  "reportsOnMap": "{shown} of {total} reports on the map",
+  "@reportsOnMap": {
+    "placeholders": {
+      "shown": {
+        "type": "int"
+      },
+      "total": {
+        "type": "int"
+      }
+    }
+  },
+  "activeSurveillanceCluster": "Active surveillance cluster",
+  "loggedCases": "{count} logged cases",
+  "@loggedCases": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "inspectManage": "Inspect & Manage",
+  "districtProfile": "District Public Health Profile",
+  "criticalHighRisk": "Critical / High Risk",
+  "topCategories": "Top categories",
+  "pickLocationTitle": "Pinpoint the incident",
+  "pickLocationHint": "Tap the map to place the pin.",
+  "useThisLocation": "Use this location",
+  "mapPinpoint": "Pinpoint on map",
+  "locationLabel": "Location",
+  "locationNotSet": "City centre (not pinpointed yet)",
+  "pinnedAt": "Pinned at {lat}, {lng}",
+  "@pinnedAt": {
+    "placeholders": {
+      "lat": {
+        "type": "String"
+      },
+      "lng": {
+        "type": "String"
+      }
+    }
+  },
+  "detectedDistrict": "Detected district: {district}",
+  "@detectedDistrict": {
+    "placeholders": {
+      "district": {
+        "type": "String"
+      }
+    }
+  },
+  "epiSurveillance": "Epidemiological Surveillance",
+  "clusterEngineTitle": "Automated Spatial-Temporal Cluster Detection Engine",
+  "clusterEngineDesc": "Continuously correlates Tripoli incident reports within a 1.2 km radius and 48–72h sliding time window using the Haversine formula and category epidemiological affinity vectors.",
+  "runClusterScan": "Run Live Cluster Scan",
+  "scanningGrid": "Scanning Tripoli Grid...",
+  "scanComplete": "Cluster scan complete! {count} active public health clusters monitored across Tripoli.",
+  "@scanComplete": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "noClustersBody": "The automated surveillance engine continuously analyzes spatio-temporal clusters as complaints are submitted across Tripoli.",
+  "radiusMeters": "Radius ~{meters}m",
+  "@radiusMeters": {
+    "placeholders": {
+      "meters": {
+        "type": "int"
+      }
+    }
+  },
+  "interrelatedReports": "Interrelated Reports",
+  "incidentsCount": "{count} Incidents",
+  "@incidentsCount": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "correlatedIncidents": "Correlated Incidents",
+  "timeWindow": "{hours}h window",
+  "@timeWindow": {
+    "placeholders": {
+      "hours": {
+        "type": "int"
+      }
+    }
+  },
+  "clusterActive": "Active",
+  "clusterInvestigating": "Investigating",
+  "clusterContained": "Contained",
+  "clusterResolved": "Resolved",
+  "changeClusterStatus": "Change status",
+  "clusterStatusUpdated": "{code} set to {status}",
+  "@clusterStatusUpdated": {
+    "placeholders": {
+      "code": {
+        "type": "String"
+      },
+      "status": {
+        "type": "String"
+      }
+    }
+  },
+  "viewOnMap": "View on map"
 }
