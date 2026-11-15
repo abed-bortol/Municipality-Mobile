@@ -5,6 +5,7 @@ import 'package:municipality/l10n/l10n.dart';
 import 'package:municipality/core/router/app_routes.dart';
 import 'package:municipality/features/auth/domain/auth_state.dart';
 import 'package:municipality/features/auth/domain/user.dart';
+import 'package:municipality/features/alerts/presentation/alerts_providers.dart';
 import 'package:municipality/features/auth/presentation/auth_controller.dart';
 
 /// Main scaffold after sign-in: bottom navigation with role-based tabs
@@ -24,6 +25,9 @@ class AppShell extends ConsumerWidget {
     final tabs = ShellTab.forRole(role);
     final current = ShellTab.values[navigationShell.currentIndex];
     final selected = tabs.indexOf(current);
+    // Alerts are staff-only on the server; citizens never load them.
+    final activeAlerts =
+        role == UserRole.citizen ? 0 : ref.watch(activeAlertCountProvider);
 
     return Scaffold(
       body: navigationShell,
@@ -38,13 +42,20 @@ class AppShell extends ConsumerWidget {
           );
         },
         destinations: [
-          for (final tab in tabs) _destination(tab, role, l10n),
+          for (final tab in tabs)
+            _destination(tab, role, l10n,
+                badge: tab == ShellTab.alerts ? activeAlerts : 0),
         ],
       ),
     );
   }
 
-  NavigationDestination _destination(ShellTab tab, UserRole role, AppLocalizations l10n) {
+  NavigationDestination _destination(
+    ShellTab tab,
+    UserRole role,
+    AppLocalizations l10n, {
+    int badge = 0,
+  }) {
     final (icon, selectedIcon, label) = switch (tab) {
       ShellTab.dashboard => (
           Icons.dashboard_outlined,
@@ -68,9 +79,15 @@ class AppShell extends ConsumerWidget {
           : (Icons.menu, Icons.menu_open, l10n.navMore),
     };
 
+    Widget withBadge(IconData data) => Badge(
+          isLabelVisible: badge > 0,
+          label: Text(badge > 99 ? '99+' : '$badge'),
+          child: Icon(data),
+        );
+
     return NavigationDestination(
-      icon: Icon(icon),
-      selectedIcon: Icon(selectedIcon),
+      icon: withBadge(icon),
+      selectedIcon: withBadge(selectedIcon),
       label: label,
     );
   }

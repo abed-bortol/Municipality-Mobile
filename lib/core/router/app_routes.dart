@@ -27,6 +27,7 @@ enum ShellTab {
 abstract final class AppRoutes {
   static const splash = '/splash';
   static const signIn = '/sign-in';
+  static const notifications = '/notifications';
 
   // Shell tabs
   static const dashboard = '/dashboard';
