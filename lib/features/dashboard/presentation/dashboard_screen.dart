@@ -6,6 +6,7 @@ import 'package:municipality/features/auth/domain/user.dart';
 import 'package:municipality/features/auth/presentation/auth_controller.dart';
 import 'package:municipality/features/dashboard/presentation/widgets/citizen_dashboard.dart';
 import 'package:municipality/features/dashboard/presentation/widgets/staff_dashboard.dart';
+import 'package:municipality/features/notifications/presentation/widgets/notification_bell.dart';
 
 /// Role-based home tab, like the website's Dashboard route: citizens get the
 /// public health portal, officers and administrators the operations view.
@@ -20,7 +21,7 @@ class DashboardScreen extends ConsumerWidget {
     };
 
     return Scaffold(
-      appBar: const BrandAppBar(),
+      appBar: const BrandAppBar(actions: [NotificationBell()]),
       body: switch (user) {
         null => const SizedBox(),
         User(role: UserRole.citizen) => CitizenDashboard(user: user),

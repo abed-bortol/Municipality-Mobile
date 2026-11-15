@@ -408,5 +408,89 @@
   },
   "discardReportTitle": "Discard this report?",
   "discardReportBody": "What you entered will be lost.",
-  "discard": "Discard"
+  "discard": "Discard",
+  "alertsFeedTitle": "Tripoli Surveillance Health Alerts",
+  "alertsFeedSubtitle": "Automated triage triggers and priority emergency dispatches",
+  "allAlertsCount": "All Alerts ({count})",
+  "@allAlertsCount": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "activeAlertsCount": "Active ({count})",
+  "@activeAlertsCount": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "alertStatusActive": "Active",
+  "alertStatusAcknowledged": "Acknowledged",
+  "alertStatusResolved": "Resolved",
+  "acknowledge": "Acknowledge",
+  "resolve": "Resolve",
+  "inspect": "Inspect",
+  "noAlertsForFilter": "No alerts match this filter.",
+  "alertAcknowledgedBy": "Alert acknowledged by {name}",
+  "@alertAcknowledgedBy": {
+    "placeholders": {
+      "name": {
+        "type": "String"
+      }
+    }
+  },
+  "alertResolved": "Alert status set to RESOLVED.",
+  "resolveAlertTitle": "Resolve this alert?",
+  "resolveAlertBody": "It moves to Resolved and can't be reopened.",
+  "noNotifications": "No notifications at this time.",
+  "markAllRead": "Mark all read",
+  "unreadCount": "{count} unread",
+  "@unreadCount": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "portalBadge": "Tripoli HealthPulse Community Health Safeguard",
+  "portalTitle": "Smart Public Health Monitoring & Surveillance for Tripoli",
+  "portalBody": "Empowering citizens in Al-Tal, Al-Mina, Bab Al-Tabbaneh, Abu Samra, Beddawi, and across Greater Tripoli with proactive environmental hygiene reporting and epidemiological vigilance.",
+  "loggedIncidents": "Logged Incidents",
+  "remediatedResolved": "Remediated & Resolved",
+  "successRate": "{rate}% success rate",
+  "@successRate": {
+    "placeholders": {
+      "rate": {
+        "type": "int"
+      }
+    }
+  },
+  "monitoringSectors": "Monitoring Sectors",
+  "districtsCovered": "Tripoli districts covered",
+  "waterDirectiveTitle": "Tripoli Drinking Water Safety Directive",
+  "waterDirectiveIntro": "Due to intermittent municipal electricity impacting pumping chlorination in parts of Bab Al-Tabbaneh and Beddawi:",
+  "waterTip1": "Boil tap water vigorously for 3 minutes before preparation of baby formula or drinking.",
+  "waterTip2": "Inspect household rooftop water storage tanks every 30 days for sediment or organic biofilm.",
+  "waterTip3": "Report sudden discolored water or sewer odor immediately via the citizen portal.",
+  "foodAlertTitle": "Food Safety & Restaurant Inspection Alert",
+  "foodAlertIntro": "Municipal Health Directorate hygiene guidelines for eateries, shawarma shops, and street vendors:",
+  "foodTip1": "Refrigerated meats must remain strictly below 4°C at all times.",
+  "foodTip2": "Mayonnaise and garlic pastes containing unpasteurized eggs are prohibited from ambient display.",
+  "foodTip3": "All commercial food handlers must carry a valid Tripoli Municipal Health Fitness Certificate.",
+  "emergencyContacts": "Municipal Health Emergency Contacts",
+  "directorateHotline": "Directorate Hotline",
+  "civilDefense": "Civil Defense",
+  "redCross": "Lebanese Red Cross",
+  "copyNumber": "Copy number",
+  "numberCopied": "{number} copied",
+  "@numberCopied": {
+    "placeholders": {
+      "number": {
+        "type": "String"
+      }
+    }
+  }
 }

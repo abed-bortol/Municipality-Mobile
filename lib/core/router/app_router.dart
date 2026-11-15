@@ -3,11 +3,14 @@ import 'package:go_router/go_router.dart';
 import 'package:municipality/l10n/l10n.dart';
 import 'package:municipality/core/router/app_routes.dart';
 import 'package:municipality/core/widgets/coming_soon.dart';
+import 'package:municipality/features/alerts/presentation/screens/alerts_screen.dart';
 import 'package:municipality/features/auth/domain/auth_state.dart';
 import 'package:municipality/features/auth/presentation/auth_controller.dart';
 import 'package:municipality/features/auth/presentation/screens/auth_screen.dart';
 import 'package:municipality/features/dashboard/presentation/dashboard_screen.dart';
 import 'package:municipality/features/more/presentation/more_screen.dart';
+import 'package:municipality/features/notifications/presentation/screens/notifications_screen.dart';
+import 'package:municipality/features/portal/presentation/public_portal_screen.dart';
 import 'package:municipality/features/reports/presentation/screens/new_report_screen.dart';
 import 'package:municipality/features/reports/presentation/screens/report_details_screen.dart';
 import 'package:municipality/features/reports/presentation/screens/reports_screen.dart';
@@ -64,6 +67,11 @@ GoRouter appRouter(Ref ref) {
         path: AppRoutes.signIn,
         pageBuilder: (context, state) => _fadePage(state, const AuthScreen()),
       ),
+      // Full screen, above the tabs (opened from the app bar bell).
+      GoRoute(
+        path: AppRoutes.notifications,
+        builder: (context, state) => const NotificationsScreen(),
+      ),
       StatefulShellRoute.indexedStack(
         pageBuilder: (context, state, shell) =>
             _fadePage(state, AppShell(navigationShell: shell)),
@@ -89,10 +97,8 @@ GoRouter appRouter(Ref ref) {
             ),
           ]),
           _tab(AppRoutes.map, (l10n) => ComingSoonScreen(title: l10n.tripoliMap)),
-          _tab(AppRoutes.alerts,
-              (l10n) => ComingSoonScreen(title: l10n.surveillanceAlerts)),
-          _tab(AppRoutes.notices,
-              (l10n) => ComingSoonScreen(title: l10n.publicPortal)),
+          _tab(AppRoutes.alerts, (_) => const AlertsScreen()),
+          _tab(AppRoutes.notices, (_) => const PublicPortalScreen()),
           StatefulShellBranch(routes: [
             GoRoute(
               path: AppRoutes.more,
