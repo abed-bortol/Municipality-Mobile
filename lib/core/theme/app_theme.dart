@@ -59,6 +59,29 @@ abstract final class AppTheme {
         errorBorder: _border(AppColors.rose400),
         focusedErrorBorder: _border(AppColors.rose400, width: 1.5),
       ),
+      navigationBarTheme: NavigationBarThemeData(
+        backgroundColor: AppColors.slate950,
+        indicatorColor: AppColors.teal600.withValues(alpha: 0.35),
+        surfaceTintColor: Colors.transparent,
+        iconTheme: WidgetStateProperty.resolveWith((states) => IconThemeData(
+              color: states.contains(WidgetState.selected)
+                  ? AppColors.teal300
+                  : AppColors.slate400,
+            )),
+        labelTextStyle: WidgetStateProperty.resolveWith((states) => TextStyle(
+              fontSize: 12,
+              fontWeight: states.contains(WidgetState.selected)
+                  ? FontWeight.w700
+                  : FontWeight.w500,
+              color: states.contains(WidgetState.selected)
+                  ? AppColors.teal300
+                  : AppColors.slate400,
+            )),
+      ),
+      listTileTheme: const ListTileThemeData(
+        iconColor: AppColors.teal400,
+        textColor: AppColors.slate100,
+      ),
       snackBarTheme: const SnackBarThemeData(
         behavior: SnackBarBehavior.floating,
         backgroundColor: AppColors.slate800,
