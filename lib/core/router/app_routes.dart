@@ -44,6 +44,7 @@ abstract final class AppRoutes {
       '/reports/$id/investigation';
 
   // Under "More"
+  static const profile = '/more/profile';
   static const investigations = '/more/investigations';
   static const clusters = '/more/clusters';
   static const analytics = '/more/analytics';

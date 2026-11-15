@@ -1,6 +1,7 @@
 import 'package:municipality/features/auth/data/auth_local_data_source.dart';
 import 'package:municipality/features/auth/data/auth_remote_data_source.dart';
 import 'package:municipality/features/auth/domain/auth_repository.dart';
+import 'package:municipality/features/auth/domain/profile_update.dart';
 import 'package:municipality/features/auth/domain/register_request.dart';
 import 'package:municipality/features/auth/domain/user.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
@@ -44,6 +45,13 @@ class AuthRepositoryImpl implements AuthRepository {
     final session = await remote.register(request);
     await local.saveSession(token: session.token, user: session.user);
     return session.user;
+  }
+
+  @override
+  Future<User> updateProfile(ProfileUpdate update) async {
+    final user = await remote.updateProfile(update);
+    await local.saveUser(user);
+    return user;
   }
 
   @override

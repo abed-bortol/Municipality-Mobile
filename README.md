@@ -63,14 +63,24 @@ lib/
       domain/                  User, AuthState, RegisterRequest (freezed), AuthRepository
       data/                    remote (dio) + local (secure storage) sources, repository impl
       presentation/            AuthController (AsyncNotifier), AuthScreen, forms
-    settings/                  language preference (LocaleController)
+    settings/                  language preference, system & risk settings (admin)
     splash/                    branded splash + AppStartupController
     shell/                     bottom navigation per role
     dashboard/                 citizen and staff dashboards
-    reports/                   Report model, repository, report cards and badges
-    categories/                hazard categories
-    clusters/                  detected outbreak clusters
-    more/                      profile, staff/admin sections, language, sign out
+    reports/                   list, details, submission form, workflow, risk estimate
+    map/                       live map (flutter_map / OpenStreetMap), location picker
+    clusters/                  cluster monitor (scan, status changes)
+    alerts/                    surveillance alerts feed
+    notifications/             bell, polling, notifications screen
+    investigations/            field investigations and inspection form
+    analytics/                 epidemiology charts
+    users/                     officers, users directory and role assignment (admin)
+    categories/                hazard categories and their weights (admin)
+    audit/                     audit trail (admin)
+    export/                    official surveillance dossier as PDF (pdf + printing)
+    profile/                   edit own profile
+    portal/                    public health portal
+    more/                      profile card, staff/admin sections, language, sign out
 ```
 
 Rules:

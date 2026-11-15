@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:municipality/l10n/l10n.dart';
 import 'package:municipality/core/router/app_routes.dart';
-import 'package:municipality/core/widgets/coming_soon.dart';
 import 'package:municipality/features/alerts/presentation/screens/alerts_screen.dart';
 import 'package:municipality/features/analytics/presentation/analytics_screen.dart';
 import 'package:municipality/features/audit/presentation/audit_logs_screen.dart';
@@ -12,12 +11,14 @@ import 'package:municipality/features/auth/presentation/screens/auth_screen.dart
 import 'package:municipality/features/categories/presentation/screens/categories_screen.dart';
 import 'package:municipality/features/clusters/presentation/screens/clusters_screen.dart';
 import 'package:municipality/features/dashboard/presentation/dashboard_screen.dart';
+import 'package:municipality/features/export/presentation/export_dossier_screen.dart';
 import 'package:municipality/features/investigations/presentation/screens/investigation_form_screen.dart';
 import 'package:municipality/features/investigations/presentation/screens/investigations_screen.dart';
 import 'package:municipality/features/map/presentation/screens/map_screen.dart';
 import 'package:municipality/features/more/presentation/more_screen.dart';
 import 'package:municipality/features/notifications/presentation/screens/notifications_screen.dart';
 import 'package:municipality/features/portal/presentation/public_portal_screen.dart';
+import 'package:municipality/features/profile/presentation/profile_screen.dart';
 import 'package:municipality/features/reports/presentation/screens/new_report_screen.dart';
 import 'package:municipality/features/reports/presentation/screens/report_details_screen.dart';
 import 'package:municipality/features/reports/presentation/screens/reports_screen.dart';
@@ -132,7 +133,9 @@ GoRouter appRouter(Ref ref) {
                   path: _relativeToMore(AppRoutes.analytics),
                   builder: (context, state) => const AnalyticsScreen(),
                 ),
-                _comingSoon(AppRoutes.exportDossier, (l10n) => l10n.exportDossier),
+                _moreRoute(
+                    AppRoutes.exportDossier, (_) => const ExportDossierScreen()),
+                _moreRoute(AppRoutes.profile, (_) => const ProfileScreen()),
                 _moreRoute(AppRoutes.users, (_) => const UsersScreen()),
                 _moreRoute(AppRoutes.categories, (_) => const CategoriesScreen()),
                 _moreRoute(
@@ -157,14 +160,7 @@ StatefulShellBranch _tab(String path, Widget Function(AppLocalizations) screen) 
       ),
     ]);
 
-/// Placeholder for screens of upcoming phases (path is relative to /more).
-GoRoute _comingSoon(String fullPath, String Function(AppLocalizations) title) =>
-    GoRoute(
-      path: _relativeToMore(fullPath),
-      builder: (context, state) =>
-          ComingSoonScreen(title: title(context.l10n)),
-    );
-
+/// A screen under the More tab ([fullPath] is the absolute route).
 GoRoute _moreRoute(String fullPath, WidgetBuilder screen) => GoRoute(
       path: _relativeToMore(fullPath),
       builder: (context, state) => screen(context),

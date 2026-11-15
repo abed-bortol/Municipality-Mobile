@@ -4,6 +4,7 @@ import 'package:municipality/core/network/api_exception.dart';
 import 'package:municipality/features/auth/data/auth_repository_impl.dart';
 import 'package:municipality/features/auth/domain/auth_repository.dart';
 import 'package:municipality/features/auth/domain/auth_state.dart';
+import 'package:municipality/features/auth/domain/profile_update.dart';
 import 'package:municipality/features/auth/domain/register_request.dart';
 import 'package:municipality/features/auth/domain/user.dart';
 import 'package:municipality/features/auth/presentation/auth_controller.dart';
@@ -35,6 +36,10 @@ class FakeAuthRepository implements AuthRepository {
   Future<User> register(RegisterRequest request) async => _user;
 
   @override
+  Future<User> updateProfile(ProfileUpdate update) async =>
+      _user.copyWith(name: update.name, district: update.district);
+
+  @override
   Future<void> signOut() async => signedOut = true;
 }
 
@@ -59,8 +64,10 @@ void main() {
 
     test('saved session is re-validated with the server', () async {
       repo.cachedUser = _user;
-      expect(await restored(),
-          AuthState.authenticated(_user.copyWith(name: 'Fresh')));
+      expect(
+        await restored(),
+        AuthState.authenticated(_user.copyWith(name: 'Fresh')),
+      );
     });
 
     test('offline keeps the cached user signed in', () async {
@@ -74,8 +81,10 @@ void main() {
     test('rejected token signs out', () async {
       repo
         ..cachedUser = _user
-        ..fetchError =
-            const ServerException(statusCode: 401, message: 'Invalid token');
+        ..fetchError = const ServerException(
+          statusCode: 401,
+          message: 'Invalid token',
+        );
       expect(await restored(), const AuthState.unauthenticated());
       expect(repo.signedOut, isTrue);
     });
@@ -86,14 +95,18 @@ void main() {
     await container
         .read(authControllerProvider.notifier)
         .signIn(email: 'samer@tripoli.lb', password: 'secret');
-    expect(container.read(authControllerProvider).value,
-        const AuthState.authenticated(_user));
+    expect(
+      container.read(authControllerProvider).value,
+      const AuthState.authenticated(_user),
+    );
   });
 
   test('signIn failure is thrown to the form, state unchanged', () async {
     await restored();
-    repo.signInError =
-        const ServerException(statusCode: 401, message: 'Invalid credentials');
+    repo.signInError = const ServerException(
+      statusCode: 401,
+      message: 'Invalid credentials',
+    );
 
     await expectLater(
       container
@@ -101,8 +114,10 @@ void main() {
           .signIn(email: 'x@y.z', password: 'bad'),
       throwsA(isA<ServerException>()),
     );
-    expect(container.read(authControllerProvider).value,
-        const AuthState.unauthenticated());
+    expect(
+      container.read(authControllerProvider).value,
+      const AuthState.unauthenticated(),
+    );
   });
 
   test('session expiry signs out with the expired flag', () async {
@@ -110,8 +125,10 @@ void main() {
     await restored();
     await container.read(authControllerProvider.notifier).onSessionExpired();
 
-    expect(container.read(authControllerProvider).value,
-        const AuthState.unauthenticated(sessionExpired: true));
+    expect(
+      container.read(authControllerProvider).value,
+      const AuthState.unauthenticated(sessionExpired: true),
+    );
     expect(repo.signedOut, isTrue);
   });
 }
