@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
+import 'package:latlong2/latlong.dart';
 import 'package:municipality/core/constants/tripoli_districts.dart';
 import 'package:municipality/core/domain/risk_level.dart';
 import 'package:municipality/core/network/api_error_message.dart';
@@ -18,6 +19,7 @@ import 'package:municipality/features/auth/domain/auth_state.dart';
 import 'package:municipality/features/auth/presentation/auth_controller.dart';
 import 'package:municipality/features/categories/data/categories_repository.dart';
 import 'package:municipality/features/categories/domain/hazard_category.dart';
+import 'package:municipality/features/map/presentation/screens/location_picker_screen.dart';
 import 'package:municipality/features/reports/domain/new_report_request.dart';
 import 'package:municipality/features/reports/domain/report.dart';
 import 'package:municipality/features/reports/domain/risk_estimate.dart';
@@ -26,7 +28,7 @@ import 'package:municipality/features/reports/presentation/widgets/risk_breakdow
 import 'package:municipality/l10n/l10n.dart';
 
 /// Website ReportFormModal as a screen, with the live risk estimate.
-/// The location is the city centre until the map picker (map phase).
+/// The location is the city centre until a point is pinned on the map.
 class NewReportScreen extends ConsumerStatefulWidget {
   const NewReportScreen({super.key});
 
@@ -49,6 +51,7 @@ class _NewReportScreenState extends ConsumerState<NewReportScreen> {
   RiskLevel _severity = RiskLevel.medium;
   late String _district = _initialDistrict();
   int _affected = 1;
+  PickedLocation? _picked;
   bool _submitting = false;
   bool _dirty = false;
   String? _error;
@@ -83,6 +86,28 @@ class _NewReportScreenState extends ConsumerState<NewReportScreen> {
     if (_affectedText.text != '$clamped') _affectedText.text = '$clamped';
   }
 
+  double get _lat => _picked?.lat ?? tripoliCenter.lat;
+  double get _lng => _picked?.lng ?? tripoliCenter.lng;
+
+  Future<void> _pickLocation() async {
+    final picked = await pickLocation(
+      context,
+      initial: _picked == null ? null : LatLng(_picked!.lat, _picked!.lng),
+    );
+    if (picked == null || !mounted) return;
+    setState(() {
+      _picked = picked;
+      _dirty = true;
+      if (tripoliDistricts.contains(picked.district)) {
+        _district = picked.district;
+      }
+    });
+    // Website: "Pinpoint in <district>, Greater Tripoli" when left empty.
+    if (_address.text.trim().isEmpty) {
+      _address.text = 'Pinpoint in ${picked.district}, Greater Tripoli';
+    }
+  }
+
   Future<void> _submit(List<HazardCategory> categories) async {
     FocusScope.of(context).unfocus();
     final l10n = context.l10n;
@@ -112,8 +137,8 @@ class _NewReportScreenState extends ConsumerState<NewReportScreen> {
               location: ReportLocation(
                 address: _address.text.trim(),
                 district: _district,
-                lat: tripoliCenter.lat,
-                lng: tripoliCenter.lng,
+                lat: _lat,
+                lng: _lng,
               ),
               affectedCount: _affected,
               initialSeverity: _severity,
@@ -317,6 +342,8 @@ class _NewReportScreenState extends ConsumerState<NewReportScreen> {
                   ),
                   const SizedBox(height: 8),
                   DropdownButtonFormField<String>(
+                    // initialValue is read once; rebuild when a pin moves it.
+                    key: ValueKey(_district),
                     initialValue: _district,
                     isExpanded: true,
                     decoration: InputDecoration(
@@ -349,6 +376,12 @@ class _NewReportScreenState extends ConsumerState<NewReportScreen> {
                         : null,
                   ),
                   const SizedBox(height: 16),
+                  _LocationField(
+                    picked: _picked,
+                    enabled: !_submitting,
+                    onPick: _pickLocation,
+                  ),
+                  const SizedBox(height: 16),
                   _Label(l10n.affectedPeopleLabel),
                   const SizedBox(height: 6),
                   _AffectedField(
@@ -363,6 +396,8 @@ class _NewReportScreenState extends ConsumerState<NewReportScreen> {
                     categoryName: category?.name ?? '',
                     severity: _severity,
                     affected: _affected,
+                    lat: _lat,
+                    lng: _lng,
                   ),
                   const SizedBox(height: 16),
                   TextFormField(
@@ -433,6 +468,68 @@ class _Label extends StatelessWidget {
   );
 }
 
+/// Picked point (or the city centre) with the "Pinpoint on map" button.
+class _LocationField extends StatelessWidget {
+  const _LocationField({
+    required this.picked,
+    required this.enabled,
+    required this.onPick,
+  });
+
+  final PickedLocation? picked;
+  final bool enabled;
+  final VoidCallback onPick;
+
+  @override
+  Widget build(BuildContext context) {
+    final l10n = context.l10n;
+    final picked = this.picked;
+
+    return Container(
+      padding: const EdgeInsets.all(12),
+      decoration: panelDecoration,
+      child: Row(
+        children: [
+          Icon(
+            picked == null ? Icons.location_searching : Icons.location_on,
+            color: picked == null ? AppColors.slate400 : AppColors.rose400,
+          ),
+          const SizedBox(width: 10),
+          Expanded(
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                _Label(l10n.locationLabel),
+                Text(
+                  picked == null
+                      ? l10n.locationNotSet
+                      : l10n.pinnedAt('${picked.lat}', '${picked.lng}'),
+                  style: Theme.of(
+                    context,
+                  ).textTheme.bodySmall?.copyWith(color: AppColors.slate400),
+                ),
+                if (picked != null)
+                  Text(
+                    l10n.detectedDistrict(l10n.districtName(picked.district)),
+                    style: Theme.of(
+                      context,
+                    ).textTheme.bodySmall?.copyWith(color: AppColors.teal300),
+                  ),
+              ],
+            ),
+          ),
+          const SizedBox(width: 8),
+          OutlinedButton.icon(
+            onPressed: enabled ? onPick : null,
+            icon: const Icon(Icons.map_outlined, size: 18),
+            label: Text(l10n.mapPinpoint),
+          ),
+        ],
+      ),
+    );
+  }
+}
+
 /// Number field with -/+ buttons (1..max).
 class _AffectedField extends StatelessWidget {
   const _AffectedField({
@@ -498,11 +595,15 @@ class _LiveEstimate extends ConsumerWidget {
     required this.categoryName,
     required this.severity,
     required this.affected,
+    required this.lat,
+    required this.lng,
   });
 
   final String categoryName;
   final RiskLevel severity;
   final int affected;
+  final double lat;
+  final double lng;
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
@@ -511,8 +612,8 @@ class _LiveEstimate extends ConsumerWidget {
       categoryName: categoryName,
       severity: severity,
       affectedCount: affected,
-      lat: tripoliCenter.lat,
-      lng: tripoliCenter.lng,
+      lat: lat,
+      lng: lng,
       nearby: ref.watch(reportsProvider).value?.reports ?? const [],
     );
 

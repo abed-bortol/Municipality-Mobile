@@ -7,9 +7,11 @@ import 'package:municipality/features/alerts/presentation/screens/alerts_screen.
 import 'package:municipality/features/auth/domain/auth_state.dart';
 import 'package:municipality/features/auth/presentation/auth_controller.dart';
 import 'package:municipality/features/auth/presentation/screens/auth_screen.dart';
+import 'package:municipality/features/clusters/presentation/screens/clusters_screen.dart';
 import 'package:municipality/features/dashboard/presentation/dashboard_screen.dart';
 import 'package:municipality/features/investigations/presentation/screens/investigation_form_screen.dart';
 import 'package:municipality/features/investigations/presentation/screens/investigations_screen.dart';
+import 'package:municipality/features/map/presentation/screens/map_screen.dart';
 import 'package:municipality/features/more/presentation/more_screen.dart';
 import 'package:municipality/features/notifications/presentation/screens/notifications_screen.dart';
 import 'package:municipality/features/portal/presentation/public_portal_screen.dart';
@@ -105,7 +107,7 @@ GoRouter appRouter(Ref ref) {
               ],
             ),
           ]),
-          _tab(AppRoutes.map, (l10n) => ComingSoonScreen(title: l10n.tripoliMap)),
+          _tab(AppRoutes.map, (_) => const MapScreen()),
           _tab(AppRoutes.alerts, (_) => const AlertsScreen()),
           _tab(AppRoutes.notices, (_) => const PublicPortalScreen()),
           StatefulShellBranch(routes: [
@@ -117,7 +119,10 @@ GoRouter appRouter(Ref ref) {
                   path: _relativeToMore(AppRoutes.investigations),
                   builder: (context, state) => const InvestigationsScreen(),
                 ),
-                _comingSoon(AppRoutes.clusters, (l10n) => l10n.clusterDetection),
+                GoRoute(
+                  path: _relativeToMore(AppRoutes.clusters),
+                  builder: (context, state) => const ClustersScreen(),
+                ),
                 _comingSoon(AppRoutes.analytics, (l10n) => l10n.epidemiologyCharts),
                 _comingSoon(AppRoutes.exportDossier, (l10n) => l10n.exportDossier),
                 _comingSoon(AppRoutes.users, (l10n) => l10n.usersOfficers),

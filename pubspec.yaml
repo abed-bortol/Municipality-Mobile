@@ -36,6 +36,8 @@ dependencies:
   # 8.2.x is the last release on Flutter's built-in Material (9.x needs material_ui).
   google_fonts: ^8.2.1
   flutter_native_splash: ^2.4.6
+  flutter_map: ^8.3.2
+  latlong2: ^0.10.1
 
 dev_dependencies:
   flutter_test:
